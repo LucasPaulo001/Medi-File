@@ -5,7 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
 </head>
-<body>
-    <h1>Tela de cadastro</h1>
+<body class="bg-dark text-light d-flex justify-content-center align-items-center" style="height: 100vh">
+     {{!--Container com o form  --}}
+    <div class="container w-50 mt-4">
+        <div class="card bg-dark p-4 border border-light-subtle">
+            {{!-- Forms --}}
+            <form class="text-light" action="/admin/register" method="post">
+                <div>
+                    <h1>Faça seu Cadastro</h1>
+                </div><br>
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" name="nome" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                    <input type="email" name="email" required="true" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text text-white-50">Nunca compartilharemos seu e-mail com mais ninguém.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Senha</label>
+                    <input type="password" name="password" minlength="5" required="true" class="form-control" id="exampleInputPassword1">
+                </div>
+                    <button type="submit" class="btn btn-primary w-100 ">Cadastro</button>
+            </form>
+            <div class="d-flex gap-2 mt-4">
+                <a href="/admin/login" class="w-100 ">
+                    <button type="submit" class="btn btn-primary w-100 ">Já tem uma conta? faça login</button>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ const handlebars = require('express-handlebars')
 const mongoose = require('mongoose')
 const path = require('path')
 const routerAuth = require('./src/routes/authRoutes')
+const homeRoutes = require('./src/routes/homeRoutes')
 const connectDB = require('./src/config/db')
 const app = express()
 
@@ -26,6 +27,9 @@ const app = express()
     //Config. da rota das rotas
         //Rota de login e cadastro
         app.use('/admin', routerAuth)
+
+        //Rota de tela principal (Home)
+        app.use('/admin', homeRoutes)
 
 //Configuração de conexão ao servidor
 const PORT = 8081
