@@ -6,6 +6,7 @@ const path = require('path')
 const routerAuth = require('./src/routes/authRoutes')
 const homeRoutes = require('./src/routes/homeRoutes')
 const connectDB = require('./src/config/db')
+const sessionConfig = require('./src/config/session')
 const app = express()
 
 //Configurações
@@ -20,9 +21,24 @@ const app = express()
 
     //Config. do mongoose
         connectDB()
+
+    //Config. do session
+        sessionConfig(app)
     
     //Config. do path para pastas estáticas
-        app.use(express.static(path.join(__dirname + 'public')))
+        app.use(express.static(path.join(__dirname, 'public')));
+
+    //Configuração da condição do Middlware de template navbar
+        //O header só aparecerá na página home
+        app.use((req, res, next) => {
+            if(req.path === '/admin/login' || req.path === '/admin/register'){
+                res.locals.showHeader = false
+            }
+            else{
+                res.locals.showHeader = true
+            }
+            next()
+        })
 
     //Config. da rota das rotas
         //Rota de login e cadastro

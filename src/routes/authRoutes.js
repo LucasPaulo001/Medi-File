@@ -51,10 +51,10 @@ routerAuth.get('/register', (req, res) => {
 //Rota de registro autenticação de dados para registro
 routerAuth.post('/register', (req, res) => {
     //Pegando dados do formulário
-    const {nome, email, password} = req.body
+    const {nome, email, password, role} = req.body
 
     //Validando formulário
-    if(!nome || !email  || !password){
+    if(!nome || !email  || !password || !role){
         return res.status(400).send('Por favor, preencha todos os campos.');
     }
     //Criando user no banco de dados e fazendo a cryptografia de senha
@@ -70,7 +70,8 @@ routerAuth.post('/register', (req, res) => {
         new user({
             nome: nome,
             email: email,
-            password: hashedPassword
+            password: hashedPassword,
+            role
         }).save().then(() => {
             console.log('Usuário cadastrado com sucesso!')
         }).catch((error) => {
