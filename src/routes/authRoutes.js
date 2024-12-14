@@ -51,8 +51,16 @@ routerAuth.get('/register', (req, res) => {
 //Rota de registro autenticação de dados para registro
 routerAuth.post('/register', (req, res) => {
     //Pegando dados do formulário
-    const {nome, email, password, role} = req.body
+    const {nome, email, password, role, crm} = req.body
 
+    //Verificando se o crm está ok
+    if(role == 'medico' && !crm){
+        return res.status(400).send('CRM é obrigatório para médicos')
+    }
+    //Verificando se o corem está ok
+    // if(role == 'enfermeiro' || role == 'tecEnfermagem' && !corem){
+    //     return res.status(400).send('COREM é obrigatório para médicos e tec. de enfermagem')
+    // }
     //Validando formulário
     if(!nome || !email  || !password || !role){
         return res.status(400).send('Por favor, preencha todos os campos.');
@@ -71,13 +79,15 @@ routerAuth.post('/register', (req, res) => {
             nome: nome,
             email: email,
             password: hashedPassword,
-            role
+            role: role,
+            // crm: role === 'medico' ? crm : null,
+            // corem: (role === 'enfermeiro' || role === 'tecEnfermagem') ? corem : null
         }).save().then(() => {
             console.log('Usuário cadastrado com sucesso!')
+            res.redirect('/admin/login');
         }).catch((error) => {
             console.log(`Erro ao cadastrar usuario ERRO: ${error}`)
         })
-        res.render('admin/register')
     })
 })
 

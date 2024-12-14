@@ -27,7 +27,7 @@ function isEnfermeiro(req, res, next){
 
 //Função de permissão para middleware de tec. de enfermagem
 function isTecEnfermagem(req, res, next){
-    if(req.session.user && req.session.role === 'tec. enfermagem'){
+    if(req.session.user && req.session.role === 'tecEnfermagem'){
         return next()
     }
     return res.status(403).send('Acesso negado. Você precisa ser Técnico de enfermagem para acessar essa página')

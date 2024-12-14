@@ -29,21 +29,21 @@
                 </div>
                 <div class="mb-3">
                     <label for="role" class="mb-3">Função</label>
-                    <select onclick="verificar(document.getElementById('role').value)" name="role" id="role" required class="form-select" aria-label="Default select example">
-                        <option selected>Paciente</option>
+                    <select onchange="verificar(this.value)" name="role" id="role" required class="form-select" aria-label="Default select example">
+                        <option value="paciente" selected>Paciente</option>
                         <option value="admin">Admin</option>
                         <option value="medico">Médico</option>
                         <option value="enfermeiro">Enfermeiro</option>
-                        <option value="tec. enfermagem">Tec. Enfermagem</option>
+                        <option value="tecEnfermagem">Tec. Enfermagem</option>
                     </select>
                 </div>
                 <div class="mb-3 d-none" id="crm">
                     <label for="crmLocal">Informe o CRM</label>
-                    <input type="text" required name="crm" id="crmLocal" class="form-control">
+                    <input type="text" name="crm" id="crmLocal" class="form-control">
                 </div>
                 <div class="mb-3 d-none" id="corem">
                     <label for="coremLocal">Informe o COREM</label>
-                    <input type="text" required name="corem" id="coremLocal" class="form-control">
+                    <input type="text" name="corem" id="coremLocal" class="form-control">
                 </div>
                     <button type="submit" class="btn btn-primary w-100 ">Cadastro</button>
             </form>

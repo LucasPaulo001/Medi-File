@@ -21,8 +21,36 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'medico', 'enfermeiro', 'tec. enfermagem', 'paciente'],
+        enum: ['admin', 'medico', 'enfermeiro', 'tecEnfermagem', 'paciente'],
         default: 'paciente'
+    },
+    crm: {
+        type: String,
+        required: function(){
+            return this.role === "medico"
+        },
+        validade: {
+            validator: function(value){
+                return /^[0-9]{5,10}$/.test(value)
+            },
+            message: "CRM inválido!"
+        }
+    },
+    // corem: {
+    //     type: String,
+    //     required: function(){
+    //         return this.role === "enfermeiro" || this.role === "tecEnfermagem"
+    //     },
+    //     validate: {
+    //         validator: function(value){
+    //             return /^[0-9]{5,10}$/.test(value)
+    //         },
+    //         message: "COREM Inválido!"
+    //     }
+    // },
+    datacadastro: {
+        type: Date,
+        default: Date.now
     }
 })
 
