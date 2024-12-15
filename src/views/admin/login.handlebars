@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-dark text-light d-flex justify-content-center align-items-center" style="height: 100vh">
+<body class="bodyLogin text-light d-flex justify-content-center align-items-center" style="height: 100vh">
      {{!--Container com o form  --}}
     <div class="container w-50 mt-4">
-        <div class="card bg-dark p-4 border border-light-subtle">
+        <div class="card p-4 border border-light-subtle">
             {{!-- Forms --}}
-            <form class="text-light" action="/admin/login" method="post">
+            <form class="text-dark" action="/admin/login" method="post">
                 <div>
                     <h1>Faça seu login</h1>
                 </div><br>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">E-mail</label>
                     <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text text-white-50">Nunca compartilharemos seu e-mail com mais ninguém.</div>
+                    <div id="emailHelp" class="form-text text-dark-50">Nunca compartilharemos seu e-mail com mais ninguém.</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Senha</label>

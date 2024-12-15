@@ -1,5 +1,136 @@
-body{
-    height: 100vh !important;
-    display: flex !important;
-    align-items: center !important;
+.card-options{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.homeBody{
+    background-color: #d3d4d4 !important;
+}
+body.bodyLogin{
+    background-color: #212529 !important;
+}
+.card-content{
+    display: flex;
+    flex-direction: column;
+    background-color: #8AB0BF;
+    position: relative;
+}
+.description h3{
+    font-size: 2vw;
+}
+.icon{
+    height: 100px;
+}
+.icon img{
+    height: 100%;
+    animation: iconCardAnimation 2s ease-in-out infinite;
+}
+@keyframes iconCardAnimation {
+    0%{
+        transform: scale(1.2);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1.2);
+    }
+}
+.cardCadPaciente{
+    width: 90% !important;
+}
+.cardWelcome h2{
+    font-size: 3vw;
+}
+#messege{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media(max-width: 668px){
+    .card-options{
+        grid-template-columns: 1fr;
+    }
+    .cardCadPaciente{
+        width: 100% !important;
+    }
+    .cardWelcome h2{
+        font-size: 4vw;
+    }
+}
+.windowExternal{
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    overflow: hidden;
+    background-color: #00000069;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.windowExternal.ativeWindow{
+    height: 100vh;
+    overflow: visible;
+}
+.card{
+    background-color: #92c3f5;
+}
+.windowInternal{
+    display: flex;
+    justify-content: center;
+    height: 0;
+    transition: .4s cubic-bezier(0.09, -0.26, 0.05, 1.95);
+}
+.card .close::before{
+    content: "\f623";
+    position: absolute;
+    background-color: red !important;
+    z-index: 9;
+    color: white;
+    font-size: 2vw;
+    border-radius: 50%;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+.windowExternal.ativeWindow .windowInternal{
+    height: 100vh;
+}
+.card-options .card-content{
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    background-color: #C9F2EE;
+}
+.bodyForm{
+    overflow-y: scroll;
+}
+
+/*Página de listagem de paciêntes*/
+
+.searchIcon::before{
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    right: 0;
+    cursor: pointer;
+    font-size: 2vw;
+}
+.search{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.btnSearch{
+    background-color: transparent;
+    border: 0;
 }

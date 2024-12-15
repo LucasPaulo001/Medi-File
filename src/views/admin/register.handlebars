@@ -4,48 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="bg-dark text-light d-flex justify-content-center align-items-center" style="height: 100vh">
      {{!--Container com o form  --}}
     <div class="container w-50 mt-4">
-        <div class="card bg-dark mt-4 p-4 border border-light-subtle">
+        <div class="card mt-4 p-4 border border-light-subtle">
             {{!-- Forms --}}
-            <form class="text-light" action="/admin/register" method="post">
+            <form class="text-dark" action="/admin/register" method="post">
                 <div>
                     <h1>Faça seu Cadastro</h1>
                 </div><br>
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
-                    <input type="text" name="nome" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" required name="nome"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                    <input type="email" name="email" required="true" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text text-white-50">Nunca compartilharemos seu e-mail com mais ninguém.</div>
+                    <input type="email" required name="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text text-dark-50">Nunca compartilharemos seu e-mail com mais ninguém.</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Senha</label>
-                    <input type="password" name="password" minlength="5" required="true" class="form-control" id="exampleInputPassword1">
+                    <input type="password" name="password" minlength="5"  class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="mb-3">
                     <label for="role" class="mb-3">Função</label>
-                    <select onclick="verificar(document.getElementById('role').value)" name="role" id="role" required class="form-select" aria-label="Default select example">
-                        <option selected>Paciente</option>
+                    <select onclick="verificar(document.getElementById('role').value)" name="role" id="role"  class="form-select" aria-label="Default select example">
+                        <option value="paciente" selected>Paciente</option>
                         <option value="admin">Admin</option>
                         <option value="medico">Médico</option>
                         <option value="enfermeiro">Enfermeiro</option>
-                        <option value="tec. enfermagem">Tec. Enfermagem</option>
                     </select>
                 </div>
                 <div class="mb-3 d-none" id="crm">
                     <label for="crmLocal">Informe o CRM</label>
-                    <input type="text" required name="crm" id="crmLocal" class="form-control">
+                    <input type="text"  name="crm" id="crmLocal" class="form-control">
                 </div>
                 <div class="mb-3 d-none" id="corem">
                     <label for="coremLocal">Informe o COREM</label>
-                    <input type="text" required name="corem" id="coremLocal" class="form-control">
+                    <input type="text"  name="corem" id="coremLocal" class="form-control">
                 </div>
-                    <button type="submit" class="btn btn-primary w-100 ">Cadastro</button>
+                    <button type="submit" class="btn btn-primary w-100">Cadastro</button>
             </form>
             <div class="d-flex gap-2 mt-4">
                 <a href="/admin/login" class="w-100 ">

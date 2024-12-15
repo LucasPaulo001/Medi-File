@@ -3,7 +3,8 @@ const express = require('express')
 const routerAuth = express.Router()
 const connectDB = require('../config/db')
 const mongoose = require('mongoose')
-const user = require('../models/user')
+const user = require('../models/User')
+const session = require('express-session')
 const bcrypt = require('bcrypt')
 
 //Função de conexão ao mongoose
@@ -30,6 +31,11 @@ routerAuth.post('/login', (req, res) => {
 
             //verifica a comparação
             if(isMatch){
+                req.session.foundUser ={
+                    nome: foundUser.nome,
+                    role: foundUser.role,
+                    email: foundUser.email
+                }
                 //Se a comparação for bem sucedida redireciona para a tela inicial
                 res.redirect('/admin/home')
             }
@@ -77,7 +83,7 @@ routerAuth.post('/register', (req, res) => {
         }).catch((error) => {
             console.log(`Erro ao cadastrar usuario ERRO: ${error}`)
         })
-        res.render('admin/register')
+        res.redirect('/admin/login')
     })
 })
 

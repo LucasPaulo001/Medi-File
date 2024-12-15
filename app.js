@@ -3,8 +3,14 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const mongoose = require('mongoose')
 const path = require('path')
+
+//Inportando rotas
 const routerAuth = require('./src/routes/authRoutes')
 const homeRoutes = require('./src/routes/homeRoutes')
+const registerPatientRoutes = require('./src/routes/registerPatient')
+const patientList = require('./src/routes/patientList')
+const perfilUser = require('./src/routes/perfilUser')
+
 const connectDB = require('./src/config/db')
 const sessionConfig = require('./src/config/session')
 const app = express()
@@ -46,6 +52,15 @@ const app = express()
 
         //Rota de tela principal (Home)
         app.use('/admin', homeRoutes)
+
+        //Rota de cadastro de pacientes
+        app.use('/admin', registerPatientRoutes)
+
+        //Rota de listagem de pacientes cadastrados
+        app.use('/admin', patientList)
+
+        //Rota de listagem de dados do usuário
+        app.use('/admin', perfilUser)
 
 //Configuração de conexão ao servidor
 const PORT = 8081
