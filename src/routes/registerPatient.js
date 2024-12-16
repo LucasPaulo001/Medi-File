@@ -5,6 +5,7 @@ const connectDB = require('../config/db')
 const moment = require('moment')
 const patientRoute = express.Router()
 const Paciente = require('../models/Patient')
+const { isAdmin } = require('../config/permissions')
 
 //Conectando ao banco de dados
     connectDB()
@@ -13,15 +14,16 @@ const Paciente = require('../models/Patient')
     // patientRoute.get('/register-patient', (req, res) => {
     //     res.render('admin/home')
     // })
-    patientRoute.post('/home', (req, res) => {
+    patientRoute.post('/home', isAdmin, (req, res) => {
         //Pegando dados de paciente do forms
-            const {nomePaciente, dataNascimento, genero, cpf, phone, alergias} = req.body
+            const {nomePaciente, nomeSocial, dataNascimento, genero, cpf, phone, alergias} = req.body
 
         //Criando novo paciente
             const formateddate = moment(dataNascimento).format('YYYY-MM-DD')
             
             new Paciente({
                 nomePaciente: nomePaciente,
+                nomeSocial: nomeSocial,
                 dataNascimento: formateddate,
                 genero: genero,
                 cpf: cpf,

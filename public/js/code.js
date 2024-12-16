@@ -3,19 +3,34 @@ console.log('ola')
 function verificar(role){
     const crm = document.getElementById('crm')
     const corem = document.getElementById('corem')
+    const espMedica = document.getElementById('espMedica')
+    
     if(role == 'medico'){
         crm.classList.remove('d-none')
+        espMedica.classList.remove('d-none')
     }
     else{
         crm.classList.add('d-none')
     }
-    if(role == 'enfermeiro' || role == 'tec. enfermagem'){
+
+    if(role == 'enfermeiro'){
         corem.classList.remove('d-none')
+        espMedica.classList.add('d-none')
     }
     else{
         corem.classList.add('d-none')
     }
     console.log(role)
+}
+function verificarGen(value){
+    const otherGen = document.getElementById('outroGen')
+    if(value == 'outro'){
+        otherGen.classList.remove('d-none')
+    }
+    else{
+        otherGen.classList.add('d-none')
+    }
+    console.log(value)
 }
 //Verificar se os campos CRM e COREM estão vazios ou não
 document.querySelector('form').addEventListener('submit', (event) => {

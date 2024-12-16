@@ -8,6 +8,10 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
+    nomeSocial: {
+        type: String,
+        required: true
+    },
     dataNascimento: {
         type: Date,
         required: true

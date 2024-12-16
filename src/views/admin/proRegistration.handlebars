@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi-File (Registro de Profissionais)</title>
+    <link rel="stylesheet" href="/css/pageCadProfessionals.css">
+</head>
+<body>
+    <dir class="container mt-4 w-50">
+        {{!-- Parte de informações básicas --}}
+        <form action="/admin/registerPro" method="post">
+            <div class="card bg-light p-3">
+                <h3>informações Básicas</h3>
+                <div class="mb-3 mt-4">
+                    <label for="nomePro">Nome Completo</label>
+                    <input type="text" id="nomePro" name="nome" class="form-control">
+                </div>
+                <div class="mb-3 mt-4">
+                    <label for="nomeSocial">Nome Social</label>
+                    <input type="text" name="nomeuser" id="nomeSocial" class="form-control">
+                </div>
+                <div class="mb-3 mt-4">
+                    <label for="cpf-pro">CPF</label>
+                    <input type="text" name="cpfDoProfissional" id="cpf-pro" class="form-control">
+                </div>
+                <div class="mb-3 mt-4">
+                    <label for="nascPro">Data de Nascimento</label>
+                    <input type="date" name="dataNascimentoProfissional" id="nascPro" class="form-control">
+                </div>
+                <div class="mb-3 mt-4">
+                    <label for="genero-Pro">Gênero</label>
+                    <select name="generoProfissional" onclick="verificarGen(document.getElementById('genero-Pro').value)" id="genero-Pro" class="form-select" aria-label="Default select example">
+                        <option selected>Informar</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="naoEspecificar">Não especificar</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                    <div class="mb-3 mt-4 d-none" id="outroGen">
+                        <label for="generoDiv">Informe</label>
+                        <input type="text" name="outroGenero" class="form-control" id="generoDiv">
+                    </div>
+                </div>
+                {{!-- Parte de endereço --}}
+                <div class="mb-3 mt-4">
+                    <h3>Endereço completo:</h3>
+                    <div class="mb-3 mt-4 d-flex gap-3">
+                        <div>
+                            <label for="street">Rua:</label>
+                            <input type="text" name="rua" id="street" class="form-control">
+                        </div>
+                        <div class="number d-block justify-content-center">
+                            <label for="number">Número:</label>
+                            <input type="text" class="form-control w-50" name="numero">
+                        </div>
+                        <div>
+                            <label for="number">Complemento:</label>
+                            <input type="text" class="form-control w-70" name="complemento">
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-4 d-flex gap-3">
+                        <div>
+                            <label for="neighborhood">Bairro</label>
+                            <input type="text" name="bairro" id="neighborhood" class="form-control">
+                        </div>
+                        <div class="number d-block justify-content-center">
+                            <label for="city">Cidade:</label>
+                            <input type="text" name="cidade" class="form-control w-50" id="city">
+                        </div>
+                        <div>
+                            <label for="state">Estado:</label>
+                            <input type="text" name="estado" class="form-control w-70" id="state">
+                        </div>
+                    </div>
+                    <div class="mb-3 w-50">
+                        <label for="cep">CEP</label>
+                        <input type="text" name="cep" class="form-control" id="cep">
+                    </div>
+                </div>
+                {{!-- Parte de contato --}}
+                <div class="container">
+                    <h3>Contato</h3>
+                    <div class="mb-3 mt-4">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" name="telefone" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <label for="cel">Celular</label>
+                        <input type="tel" name="celular" class="form-control" id="cel">
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <label for="email">E-mail</label>
+                        <input type="text" name="email" class="form-control" id="email">
+                    </div>
+                </div>
+                {{!-- Credênciais profissionais --}}
+                <div class="container mt-4 p-3">
+                    <h3>Credênciais Profissionais</h3>
+                    <div class="mb-3 mt-4">
+                        <label for="role">Cargo</label>
+                        <select class="form-select" onclick="verificar(document.getElementById('role').value)" name="cargo" id="role" aria-label="Default select example">
+                            <option selected>Informar Cargo</option>
+                            <option value="medico">Médico</option>
+                            <option value="enfermeiro">Enfermeiro</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 mt-4 d-none" id="crm">
+                        <label for="crm">CRM</label>
+                        <input type="text" class="form-control" id="crm" name="crm">
+                    </div>
+                    <div class="mb-3 mt-4 d-none" id="corem">
+                        <label for="corem">COREM</label>
+                        <input type="text" class="form-control" id="corem" name="corem">
+                    </div>
+                    <div class="mb-3 mt-4 d-none" id="espMedica">
+                        <label for="espMedica">Especialidade Médica</label>
+                        <input type="text" class="form-control" id="espMedica" name="especialidadeMedica">
+                    </div>
+                </div>
+                {{!-- Dados de acesso --}}
+                <div class="container">
+                    <h3>Dados de Acesso</h3>
+                    <div class="mb-3 mt-4">
+                        <label for="nomeUser">Nome de Usuário</label>
+                        <input type="text" name="nomeDeUsuario" class="form-control" id="nomeUser">
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <label for="senhaUser">Senha para acesso</label>
+                        <input type="password" name="password" class="form-control" id="senhaUser">
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <label for="senhaUser">Confirmar senha</label>
+                        <input type="password" name="passwordConfirm" class="form-control" id="senhaUser">
+                    </div>
+                </div>
+                <div class="container mt-4">
+                    <h3>Validação</h3>
+                    <div class="mb-3 mt-4">
+                        <label for="confirmarEmail" class="form-label">Validar E-mail <i><small>(Informe o seu E-mail de admin para que seja enviada a verificação para o profissional)</small></i></label>
+                        <input type="email" placeholder="E-mail de admin" class="form-control" id="confirmarEmail" name="emailAdmin">
+                    </div>
+                </div>
+                <div class="mt-4 w-100 d-flex justify-content-center">
+                    <button class="btn btn-success" type="submit">Cadastrar</button>
+                </div>
+            </div>
+        </dir>
+    </form>
+    <script src="/js/code.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

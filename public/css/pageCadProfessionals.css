@@ -1,0 +1,6 @@
+.number{
+    align-items: center;
+    display: flex !important;
+    justify-content: center;
+    flex-direction: column;
+}

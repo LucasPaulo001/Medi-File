@@ -10,7 +10,7 @@
     <main class="container mt-4">
         <section class="d-block w-100 justify-content-center align-items-center">
                 <div class="card cardWelcome d-flex justify-content-center align-items-center  p-4 text-dark border-light-subtle">
-                    <h2>Bem vido ao Medi-File, {{user.nome}}!</h2><br>
+                    <h2>Bem vido ao Medi-File, {{user.nomeuser}}!</h2><br>
                     <span id="messege"></span>
                 </div>
             <div class="card-options container w-100 gap-4 mt-4">
@@ -38,7 +38,7 @@
                     <div class="description mt-4">
                         <h3>Adicione médicos e enfermeiros à sua equipe de forma simples e organizada.</h3>
                         <div class="w-100 d-flex align-items-center justify-content-center mt-4">
-                            <button class="btn btn-success">Registrar</button>
+                            <a href="/admin/registerPro"><button class="btn btn-success">Registrar</button></a>
                         </div>
                     </div>
                 </div>
@@ -58,6 +58,10 @@
                             <div class="mb-3">
                                 <label for="nomePaciente">Nome Completo</label>
                                 <input type="text" required class="form-control" name="nomePaciente" id="nomePaciente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nomePaciente">Nome Social</label>
+                                <input type="text" required class="form-control" name="nomeSocial" id="nomePaciente">
                             </div>
                             <div class="mb-3">
                                 <label for="dataNascimento">Data de Nascimento</label>

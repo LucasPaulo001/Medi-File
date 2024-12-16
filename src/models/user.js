@@ -10,6 +10,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    nomeuser: {
+        type: String,
+        required: true,
+        unique: true
+    },
     email: {
         type: String,
         required: true,
@@ -21,7 +26,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'medico', 'enfermeiro', 'paciente'],
+        enum: ['admin', 'medico', 'enfermeiro', 'paciente', 'profissional'],
         default: 'paciente'
     }
 })

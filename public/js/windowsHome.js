@@ -23,7 +23,7 @@ if(localHour >= 18){
     img.src = '/assets/images/noite.png'
     msg.appendChild(img)
 }
-else if(localHour > 0 && localHour < 5){
+else if(localHour >= 0 && localHour < 5){
     msg.innerHTML = "<h4>Tenha uma Boa Madrugada!</h4>"
     img.style.height = '90px'
     img.src = '/assets/images/madrugada.png'

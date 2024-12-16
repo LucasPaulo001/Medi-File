@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>
+                            <th scope="col">Nome Social</th>
                             <th scope="col">Data de nascimento</th>
                             <th scope="col">Gênero</th>
                             <th scope="col">CPF</th>
@@ -34,6 +35,7 @@
                         {{#each pacientes}}
                             <tr>
                                     <td>{{this.nomePaciente}}</td>
+                                    <td>{{this.nomeSocial}}</td>
                                     <td>{{this.dataNascimento}}</td>
                                     <td>{{this.genero}}</td>
                                     <td>{{this.cpf}}</td>

@@ -10,6 +10,7 @@ const homeRoutes = require('./src/routes/homeRoutes')
 const registerPatientRoutes = require('./src/routes/registerPatient')
 const patientList = require('./src/routes/patientList')
 const perfilUser = require('./src/routes/perfilUser')
+const proRegister = require('./src/routes/authProfessionals')
 
 const connectDB = require('./src/config/db')
 const sessionConfig = require('./src/config/session')
@@ -61,6 +62,9 @@ const app = express()
 
         //Rota de listagem de dados do usuário
         app.use('/admin', perfilUser)
+
+        //Rota de cadastro de profissionais
+        app.use('/admin', proRegister)
 
 //Configuração de conexão ao servidor
 const PORT = 8081

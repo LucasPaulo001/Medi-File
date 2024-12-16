@@ -4,8 +4,10 @@ const routerAuth = express.Router()
 const connectDB = require('../config/db')
 const mongoose = require('mongoose')
 const user = require('../models/User')
+const Professional = require('../models/Professional')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
+const professionals = require('./authProfessionals')
 
 //Função de conexão ao mongoose
 connectDB()
@@ -33,6 +35,7 @@ routerAuth.post('/login', (req, res) => {
             if(isMatch){
                 req.session.foundUser ={
                     nome: foundUser.nome,
+                    nomeuser: foundUser.nomeuser,
                     role: foundUser.role,
                     email: foundUser.email
                 }
@@ -57,10 +60,10 @@ routerAuth.get('/register', (req, res) => {
 //Rota de registro autenticação de dados para registro
 routerAuth.post('/register', (req, res) => {
     //Pegando dados do formulário
-    const {nome, email, password, role} = req.body
+    const {nome, nomeuser, email, password, role} = req.body
 
     //Validando formulário
-    if(!nome || !email  || !password || !role){
+    if(!nome || !nomeuser || !email  || !password || !role){
         return res.status(400).send('Por favor, preencha todos os campos.');
     }
     //Criando user no banco de dados e fazendo a cryptografia de senha
@@ -75,6 +78,7 @@ routerAuth.post('/register', (req, res) => {
         //Criando o usuário no banco de dados
         new user({
             nome: nome,
+            nomeuser: nomeuser,
             email: email,
             password: hashedPassword,
             role
