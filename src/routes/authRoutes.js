@@ -19,18 +19,37 @@ routerAuth.get('/login', (req, res) => {
 
 //Rota de login autenticação de dados para login
 routerAuth.post('/login', (req, res) => {
+
     //Pegando dados do formulário
     const {email, password} = req.body
+    let erros = []
 
+    //Configuração de middlware para informar os erros
+    if(!email && typeof email == undefined || email == null){
+        erros.push({text: 'E-mail inválido!'})
+    }
+
+    if(!password && typeof password == undefined || password == null){
+        erros.push({text: 'Senha inválida!'})
+    }
+    if(erros.length > 0){
+        res.render('admin/login', {erros})
+    }
+    console.log(erros)
     //Buscando dados do email para a autenticação
     user.findOne({email:email}).then(foundUser => {
+
+        //Verificando se o usuário está no banco de dados
         if (!foundUser) {
-            return res.status(400).send('Usuário não encontrado');
+            req.flash('error_msg', 'Usuário não encontrado')
+            return res.redirect('/admin/login')
         }
+        
         //Comparando a senha hash com a senha no hash
         bcrypt.compare(password, foundUser.password, (error, isMatch) => {
-            if(error) throw error
 
+            if(error) throw error
+        
             //verifica a comparação
             if(isMatch){
                 req.session.foundUser ={
@@ -40,15 +59,19 @@ routerAuth.post('/login', (req, res) => {
                     email: foundUser.email
                 }
                 //Se a comparação for bem sucedida redireciona para a tela inicial
-                res.redirect('/admin/home')
+                req.flash('success_msg', 'Login feito com sucesso')
+                return res.redirect('/admin/home')
             }
             else {
                 // Senha incorreta
-                res.status(400).send('Senha incorreta');
+                req.flash('error_msg', 'Senha incorreta!')
+                return res.redirect('/admin/login')
             }
         })
+        
     }).catch(error => {
-        res.status(500).send('Erro no servidor');
+       req.flash('error_msg', 'Erro ao tentar fazer login')
+       return res.redirect('/admin/login')
     })
 })
 
@@ -81,11 +104,11 @@ routerAuth.post('/register', (req, res) => {
             nomeuser: nomeuser,
             email: email,
             password: hashedPassword,
-            role
+            role: role
         }).save().then(() => {
-            console.log('Usuário cadastrado com sucesso!')
+            req.flash('success_msg', 'Usuário cadastrodo com sucesso!')
         }).catch((error) => {
-            console.log(`Erro ao cadastrar usuario ERRO: ${error}`)
+            req.flash('error_msg', 'Erro ao cadastrar usuário!')
         })
         res.redirect('/admin/login')
     })

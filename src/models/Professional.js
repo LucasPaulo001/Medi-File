@@ -110,7 +110,7 @@ const ProfissionalSchema = new Schema({
     tokenVerificado: {
         type: String,
     },
-    cargo: {
+    role: {
         type: String,
         required: true,
         enum: ['admin', 'medico', 'enfermeiro', 'profissional'],
@@ -118,7 +118,6 @@ const ProfissionalSchema = new Schema({
     },
     crm: {
         type: String,
-        required: false
     },
     corem: {
         type: String,

@@ -1,8 +1,10 @@
 //Inportação de módulos
 const express = require('express')
 const handlebars = require('express-handlebars')
+const session = require('express-session')
 const mongoose = require('mongoose')
 const path = require('path')
+const flash = require('connect-flash')
 
 //Inportando rotas
 const routerAuth = require('./src/routes/authRoutes')
@@ -11,6 +13,8 @@ const registerPatientRoutes = require('./src/routes/registerPatient')
 const patientList = require('./src/routes/patientList')
 const perfilUser = require('./src/routes/perfilUser')
 const proRegister = require('./src/routes/authProfessionals')
+const proLogin = require('./src/routes/loginProfessionals')
+const proList = require('./src/routes/manageProfessionals')
 
 const connectDB = require('./src/config/db')
 const sessionConfig = require('./src/config/session')
@@ -28,9 +32,20 @@ const app = express()
 
     //Config. do mongoose
         connectDB()
-
+    
     //Config. do session
         sessionConfig(app)
+
+    //Config. do flash
+        app.use(flash())
+    
+    //Config. de Middlware de mensagens 
+        app.use((req, res, next) =>{
+            res.locals.success_msg = req.flash('success_msg')
+            res.locals.error_msg = req.flash('error_msg')
+
+            next()
+        })
     
     //Config. do path para pastas estáticas
         app.use(express.static(path.join(__dirname, 'public')));
@@ -38,7 +53,7 @@ const app = express()
     //Configuração da condição do Middlware de template navbar
         //O header só aparecerá na página home
         app.use((req, res, next) => {
-            if(req.path === '/admin/login' || req.path === '/admin/register'){
+            if(req.path === '/admin/login' || req.path === '/admin/register' || req.path === '/admin/professional/login'){
                 res.locals.showHeader = false
             }
             else{
@@ -63,8 +78,14 @@ const app = express()
         //Rota de listagem de dados do usuário
         app.use('/admin', perfilUser)
 
-        //Rota de cadastro de profissionais
+        //Rota de cadastro de profissionais feitas pelo adm
         app.use('/admin', proRegister)
+
+        //Rota de login de profissionais
+        app.use('/admin', proLogin)
+
+        //Rota de gerenciamento de profissionais
+        app.use('/admin', proList)
 
 //Configuração de conexão ao servidor
 const PORT = 8081

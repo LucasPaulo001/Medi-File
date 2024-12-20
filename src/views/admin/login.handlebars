@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="bodyLogin text-light d-flex justify-content-center align-items-center" style="height: 100vh">
+
+    {{#each erros}}
+        <div class="alert alert-danger">{{this.texto}}</div>
+    {{else}}
+
+    {{/each}}
      {{!--Container com o form  --}}
     <div class="container w-50 mt-4">
         <div class="card p-4 border border-light-subtle">
@@ -30,6 +36,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
+                <div class="d-flex gap-2 mt-4">
+                    <a href="/admin/professional/login" class="w-100"> 
+                        <button type="submit" class="btn btn-primary w-100">Clique aqui (Se caso já for nosso funcionário!)</button>
+                    </a>
+                </div>
                 <div class="d-flex gap-2 mt-4">
                     <a href="/admin/register" class="w-100"> 
                         <button type="submit" class="btn btn-primary w-100">Não tem uma conta? faça o seu cadastro!</button>

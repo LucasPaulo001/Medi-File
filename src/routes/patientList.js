@@ -38,18 +38,18 @@ const { isAdmin, isEnfermeiro, isMedico } = require('../config/permissions')
     })
 
     //Rota geral que abrange todas, para a implementação no forms
-    patientList.get('/redirectPatientList', (req, res) => {
-        if(req.session.role === 'admin'){
-            return res.render('/adm/patientList')
-        }
-        if(req.session.role === 'medico'){
-            return res.render('/medic/patientList')
-        }
-        if(req.session.role === 'enfermeiro'){
-            return res.render('/enf/patientList')
-        }
-        return res.status(403).send('Acesso negado. Você não tem permissão para acessar essa página.')
-    })
+    // patientList.get('/redirectPatientList', (req, res) => {
+    //     if(req.session.role === 'admin'){
+    //         return res.render('/adm/patientList')
+    //     }
+    //     if(req.session.role === 'medico'){
+    //         return res.render('/medic/patientList')
+    //     }
+    //     if(req.session.role === 'enfermeiro'){
+    //         return res.render('/enf/patientList')
+    //     }
+    //     return res.status(403).send('Acesso negado. Você não tem permissão para acessar essa página.')
+    // })
 
 //Exportando rota
 module.exports = patientList

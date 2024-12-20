@@ -2,11 +2,13 @@
 const session = require('express-session')
 
 //Função de permição para a middleware de admin
+let error = []
 function isAdmin(req, res, next){
     if(req.session.foundUser && req.session.foundUser.role === 'admin'){
         return next()
     }
-    return res.status(403).send('Acesso negado. Você precisa ser Admin para acessar essa página.');
+    error.push({text: 'Erro: Você não tem permissão de admin para acessar esta página'})
+    
 }
 
 //Função de permissão para a middleware de medico

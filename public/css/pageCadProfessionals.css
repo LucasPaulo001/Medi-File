@@ -4,3 +4,45 @@
     justify-content: center;
     flex-direction: column;
 }
+/*Parte de detalhes dos profissionais*/
+
+.proDetails{
+    height: 0;
+    width: 100vw;
+    visibility: hidden;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    background-color: #0000004d;
+    backdrop-filter: blur(2px);
+    transition: .2s ease-in-out;
+}
+.proDetails.ativeDetail{
+    height: 100vh;
+    overflow: visible;
+    visibility: visible;
+}
+
+.closeDetail::before{
+    position: absolute;
+    right: 0;
+    font-size: 2vw;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.namePro{
+    text-align: center;
+}
+
+.pro{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+    gap: 20px;
+}
+.cardPro{
+    width: 100% !important;
+}

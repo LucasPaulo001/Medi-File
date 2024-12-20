@@ -7,14 +7,21 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="homeBody">
+    {{#each error}}
+        <div class="alert alert-danger">{{this.text}}</div>
+    {{else}}
+
+    {{/each}}
     <main class="container mt-4">
+        {{!-- Card de boas vindas --}}
         <section class="d-block w-100 justify-content-center align-items-center">
                 <div class="card cardWelcome d-flex justify-content-center align-items-center  p-4 text-dark border-light-subtle">
                     <h2>Bem vido ao Medi-File, {{user.nomeuser}}!</h2><br>
                     <span id="messege"></span>
                 </div>
+                {{!-- Card para cadastrar pacientes --}}
             <div class="card-options container w-100 gap-4 mt-4">
-                <div class="card-content card p-4 w-100 text-dark">
+                <div class="card-content card p-3 w-100 text-dark">
                     <div class="title-card">
                         <h2>Cadastre pacientes</h2>
                     </div>
@@ -28,7 +35,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-content card p-4 w-100 text-dark">
+                {{!-- Card para cadastrar novos profissionais --}}
+                <div class="card-content card p-3 w-100 text-dark">
                     <div class="title-card">
                         <h2>Gerencie Profissionais</h2>
                     </div>
@@ -39,6 +47,21 @@
                         <h3>Adicione médicos e enfermeiros à sua equipe de forma simples e organizada.</h3>
                         <div class="w-100 d-flex align-items-center justify-content-center mt-4">
                             <a href="/admin/registerPro"><button class="btn btn-success">Registrar</button></a>
+                        </div>
+                    </div>
+                </div>
+                {{!-- Card para gerenciar os profissionais cadastrados --}}
+                <div class="card-content card p-3 w-100 text-dark">
+                    <div class="title-card">
+                        <h2>Veja a lista de Profissionais Cadastrados</h2>
+                    </div>
+                    <div class="icon">
+                        <img src="/assets/images/cadPro.png" alt="">
+                    </div>
+                    <div class="description mt-4">
+                        <h3>Gerencie os profissionais já cadastrados no sistema.</h3>
+                        <div class="w-100 d-flex align-items-center justify-content-center mt-4">
+                            <a href="/admin/listPro"><button class="btn btn-success">Gerenciar</button></a>
                         </div>
                     </div>
                 </div>
@@ -56,20 +79,20 @@
                     <div class="card bg-light p-4">
                         <form action="/admin/home" method="post">
                             <div class="mb-3">
-                                <label for="nomePaciente">Nome Completo</label>
+                                <label for="nomePaciente">Nome Completo:</label>
                                 <input type="text" required class="form-control" name="nomePaciente" id="nomePaciente">
                             </div>
                             <div class="mb-3">
-                                <label for="nomePaciente">Nome Social</label>
+                                <label for="nomePaciente">Nome Social:</label>
                                 <input type="text" required class="form-control" name="nomeSocial" id="nomePaciente">
                             </div>
                             <div class="mb-3">
-                                <label for="dataNascimento">Data de Nascimento</label>
+                                <label for="dataNascimento">Data de Nascimento:</label>
                                 <input type="date"required class="form-control" name="dataNascimento" id="dataNascimento">
                             </div>
 
                             <div class="card bg-light mb-3 p-4">
-                                <label for="genero" class="form-label">Gênero</label>
+                                <label for="genero" class="form-label">Gênero:</label>
                                 <select class="form-select" id="genero" name="genero" required>
                                     <option value="masculino">Masculino</option>
                                     <option value="feminino">Feminino</option>
@@ -78,20 +101,38 @@
                             </div>
                             <div class="card bg-light p-4 mt-4">
                                 <div class="mb-3">
-                                    <label for="cpf">CPF</label>
+                                    <label for="cpf">CPF:</label>
                                     <input type="text" class="form-control" name="cpf" id="cpf">
                                 </div>
                             </div>
                             <div class="card bg-light p-4 mt-4">
                                 <div class="mb-3">
-                                    <label for="phone">Telefone</label>
+                                    <label for="phone">Telefone:</label>
                                     <input type="tel" class="form-control" name="phone" id="phone">
                                 </div>
                             </div>
                             <div class="card bg-light mt-4 p-4">
-                                <label for="alergias">Alergias</label>
-                                <input type="text" name="alergias" id="alergias" class="form-control">
+                                <label for="sus">SUS (Sistema Único de Saúde):</label>
+                                <input type="text" name="sus" id="sus" class="form-control">
                             </div>
+                            <div class="card bg-light mt-4 p-4">
+                                <h2>Localização</h2>
+                                <div class="w-100 d-flex gap-3">
+                                    <div class="mb-3 mt-4 w-50">
+                                        <label for="rua">Rua:</label>
+                                        <input type="text" name="rua" id="rua" class="form-control">
+                                    </div>
+                                    <div class="mb-3 mt-4 w-50">
+                                        <label for="cidade">Cidade:</label>
+                                        <input type="text" name="cidade" id="cidade" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="mb-3 w-50">
+                                    <label for="numlocal">Número</label>
+                                    <input type="text" class="form-control" name="numlocal" id="numlocal">
+                                </div>
+                            </div>
+
                             <div class="mt-4 p-4 w-100 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-success">Confirmar Registro</button>
                             </div>

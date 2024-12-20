@@ -36,9 +36,18 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
-    alergias: {
+    cpf: {
         type: String,
         required: true
+    },
+    rua: {
+        type: String,
+    },
+    cidade: {
+        type: String
+    },
+    numlocal: {
+        type: String
     }
 })
 

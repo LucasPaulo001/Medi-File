@@ -12,16 +12,17 @@ const { ModifiedPathsSnapshot } = require('mongoose')
     professionals.get('/registerPro', isAdmin, (req, res) => {
         res.render('admin/proRegistration')
     })
-    
+    const erros = []
     professionals.post('/registerPro', (req, res) => {
         // Pegando dados do formulário
         const {
-            nome, nomeuser, cpfDoProfissional, dataNascimentoProfissional, generoProfissional, outroGenero, rua, numero, complemento, bairro, cidade, estado, cep, telefone, celular, email, emailVerificado, cargo, crm, corem, especialidadeMedica, nomeDeUsuario, password, passwordConfirm, emailAdmin
+            nome, nomeuser, cpfDoProfissional, dataNascimentoProfissional, generoProfissional, outroGenero, rua, numero, complemento, bairro, cidade, estado, cep, telefone, celular, email, emailVerificado, role, crm, corem, especialidadeMedica, nomeDeUsuario, password, passwordConfirm, emailAdmin
         } = req.body;
     
         // Comparando senhas
         if (password !== passwordConfirm) {
-            return res.status(400).send('As senhas não coincidem');
+            erros.push({text: 'As senhas não coincidem'})
+            return res.redirect('/admin/registerPro')
         }
     
         // Gerando token de verificação para o profissional
@@ -29,6 +30,7 @@ const { ModifiedPathsSnapshot } = require('mongoose')
     
         // Criptografando a senha e salvando profissional
         const saltRounds = 10;
+
         let savedProfessionalData
         bcrypt.hash(password, saltRounds).then((hashedPassword) => {
             // Criando collection no banco de dados
@@ -50,8 +52,8 @@ const { ModifiedPathsSnapshot } = require('mongoose')
                 celular: celular,
                 email: email,
                 emailVerificado: emailVerificado,
-                cargo: cargo,
-                crm: crm,
+                role: role,
+                crm: crm.trim() || "",
                 corem: corem,
                 especialidadeMedica: especialidadeMedica,
                 nomeDeUsuario: nomeDeUsuario,
@@ -65,6 +67,22 @@ const { ModifiedPathsSnapshot } = require('mongoose')
         })
         .then((savedProfessional) => {
             savedProfessionalData = savedProfessional
+
+            //Salvando credênciais do profissional no banco de dados de usuários
+            const newUser = new User({
+                nome: savedProfessionalData.nome,
+                nomeuser: savedProfessionalData.nomeuser,
+                email: savedProfessionalData.email,
+                password: savedProfessionalData.password,
+                role: role
+            })
+            newUser.save().then(() => {
+                req.flash('success_msg', 'O profissional está apto a fazer o login')
+            }).catch((error) => {
+                req.flash('error_msg', `Erro ao tentar permitir login do(a) Profissional ERRO: ${error}`)
+            })
+            //--------------------------------------------------------------
+
             // Verificar se o profissional foi salvo corretamente
             if (!savedProfessional) {
                 throw new Error('Falha ao salvar o profissional no banco de dados');
@@ -74,7 +92,7 @@ const { ModifiedPathsSnapshot } = require('mongoose')
             if (!savedProfessional.nome) {
                 throw new Error('Nome do profissional não encontrado');
             }
-    
+            
             // Configurando o transporter para a validação
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -92,21 +110,21 @@ const { ModifiedPathsSnapshot } = require('mongoose')
                 from: emailAdmin,
                 to: savedProfessional.email,
                 subject: 'Confirmação de E-mail',
-                text: `Olá ${savedProfessional.nome}, parece que você é o nosso novo(a) ${savedProfessional.cargo}!\n\nSeus Dados - E-mail: ${savedProfessional.email}\nSenha: ${savedProfessional.passwordConfirm}\n\nClique no link abaixo para validar seu e-mail:\n\n${link}\n\nApós validar você já pode fazer seu login e acessar a plataforma no seguinte link: http://localhost:8081/admin/professional/login`
+                text: `Olá ${savedProfessional.nome}, parece que você é o(a) nosso(a) novo(a) ${savedProfessional.role}!\n\nSeus Dados - E-mail: ${savedProfessional.email}\nSenha: ${savedProfessional.passwordConfirm}\n\nClique no link abaixo para validar seu e-mail:\n\n${link}\n\nApós validar você já pode fazer seu login e acessar a plataforma no seguinte link: http://localhost:8081/admin/login`
             };
     
             // Enviando o E-mail
-            return transporter.sendMail(mailOption);
+            return transporter.sendMail(mailOption)
         })
-            .then(() => {
+        .then(() => {
                 // Responder ao cliente após salvar tudo
-                res.status(201).send('Cadastro realizado e e-mail enviado para validação.');
+                res.status(201).send('Cadastro realizado e e-mail enviado para validação.')
             })
             .catch((error) => {
                 console.error(`Erro ao registrar profissional ERRO: ${error}`);
                 res.status(500).send(`Erro ao registrar profissional ERRO: ${error}`);
-            });
-        });
+            })
+        })
     
     //Rota para validar e-mail
     professionals.get('/verifyEmail/:token', (req, res) => {
@@ -123,18 +141,11 @@ const { ModifiedPathsSnapshot } = require('mongoose')
             return profissional.save()
         })
         .then(() => {
-            res.render('admin/verifyEmail')
+            res.send('email validado com sucesso!')
         }).catch((error) => {
             res.status(500).send(`Erro ao validar e-mail ERRO: ${error}`)
         })
     })
-
-    professionals.get('/professional/login', (req, res) => {
-        res.render('admin/profissionaisLogin')
-        
-    })
-    
-    
 
 //Exportação de rota
 module.exports = professionals

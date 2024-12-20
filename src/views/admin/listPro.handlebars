@@ -1,0 +1,86 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medi-File (Nossos profissionais)</title>
+  </head>
+  <body>
+    <main class="container p-3">
+      <div class="container p-3 d-flex justify-content-center">
+        <h1 class="text-dark">Profissionais Cadastrados</h1>
+      </div>
+        <div class="pro">
+            {{#each profissional}}
+                <div class="card cardPro bg-light w-50 mt-4">
+                    <div class="card-header">
+                    <div class="p-3">
+                        <img src="/assets/images/profile.png" height="100px"  class="rounded mx-auto d-block" alt=""/>
+                    </div>
+                    <div class="namePro">
+                        <h3>{{this.nome}}</h3>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item disabled" aria-disabled="true">Cargo: <span class="text-success">{{this.role}}</span></li>
+                        <li class="list-group-item">Especialidade: {{this.especialidadeMedica}}</li>
+                        <li class="list-group-item">Contato: {{this.celular}}</li>
+                    </ul>
+                    </div>
+                    <div class="card-footer">
+                    <button class="btn btn-primary openMod"
+                    onclick="openDetail('{{_id}}')" >Ver detalhes</button>
+                    <button class="btn btn-danger">Remover</button>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </main>
+
+    {{!-- detalhes --}}
+    {{#each profissional}}
+        <div class="proDetails d-flex justify-content-center" onclick="closeWindowExternal('{{_id}}')" id="proDetails-{{_id}}">
+            <div class="card overflow-auto w-50 bg-light text-dark" id="details">
+                <i class="bi bi-x-circle closeDetail" onclick="closeWindow('{{_id}}')" id="closeDetail"></i>
+                <div class="card-body mt-4 p-3">
+                    <div class="p-3">
+                        <h2>Dados Básicos</h2>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item disabled" aria-disabled="true"><strong>Nome Completo:</strong> {{this.nome}}</li>
+                        <li class="list-group-item"><strong>E-mail:</strong> {{this.email}} / status: {{this.emailVerificado}}</li>
+                    </ul>
+                    <div class="container mt-4">
+                        <div class="p-3">
+                            <h3>Informações de Endereço</h3>
+                        </div>
+                    
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Rua:</strong> {{this.rua}}</li>
+                            <li class="list-group-item"><strong>Número:</strong> {{this.numero}}</li>
+                            <li class="list-group-item"><strong>Complemento:</strong> {{this.complemento}}</li>
+                            <li class="list-group-item"><strong>Bairro:</strong> {{this.bairro}}</li>
+                            <li class="list-group-item"><strong>Cidade:</strong> {{this.cidade}} / <strong>Estado:</strong> {{this.estado}}</li>
+                            <li class="list-group-item"><strong>CEP:</strong> {{this.cep}}</li>
+                        </ul>
+                    </div>
+                    <div class="container mt-4">
+                        <div class="p-3">
+                            <h3>Informações Profissionais</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Cargo:</strong> {{this.role}}</li>
+                            <li class="list-group-item"><strong>Especialidade:</strong> {{this.especialidadeMedica}}</li>
+                            <li class="list-group-item"><strong>CRM:</strong> {{this.crm}}</li>
+                            <li class="list-group-item"><strong>COREM:</strong> {{this.corem}}</li>
+                            <li class="list-group-item"><strong>Status:</strong> {{this.status}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
+    <script src="/js/windowsDetails.js"></script>
+  </body>
+</html>
