@@ -61,7 +61,7 @@ const app = express()
     //Configuração da condição do Middlware de template navbar
         //O header só aparecerá na página home
         app.use((req, res, next) => {
-            if(req.path === '/admin/login' || req.path === '/admin/register' || req.path === '/admin/professional/login'){
+            if(req.path === '/admin/login' || req.path === '/admin/register' || req.path === '/admin/professional/login' || req.path === '/admin/sendAttPass' || req.path === '/admin/attPassword'){
                 res.locals.showHeader = false
             }
             else{

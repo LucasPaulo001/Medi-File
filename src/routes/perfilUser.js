@@ -6,12 +6,16 @@ const user = require('../models/User')
 //Rotas
     perfilData.get('/perfilUser', (req, res) => { 
         if (!req.user) {
-            return res.redirect('/admin/login');  // Redireciona para o login se não estiver autenticado
+            return res.redirect('/admin/login');
         }
-    
-        // Acessando o nome do usuário
-        const nomeUser = req.user.nomeuser || 'Usuário não encontrado';
-        res.render('admin/perfilUser', { nomeUser: nomeUser })
+       //Acessando dados do usuário
+        const {nome, nomeuser, email, role} = req.user
+        res.render('admin/perfilUser', {
+            nome: nome,
+            nomeuser: nomeuser,
+            email: email,
+            role: role,
+        })
     })
     
 //Exportando a rota

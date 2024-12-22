@@ -65,7 +65,7 @@ const {isAdmin} = require('../helpers/isAdmin')
             cep = req.body.cep
 
             dados.save().then(() => {
-                req.flash('success_msg', 'Categoria editada com sucesso!')
+                req.flash('success_msg', 'Dados do paciente editados com sucesso!')
                 res.redirect('/admin/patientList')
             }).catch(() => {
                 req.flash('error_msg', 'Erro ao editar Dados')

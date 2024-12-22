@@ -33,6 +33,14 @@ const userSchema = new Schema({
         type: String,
         enum: ['admin', 'medico', 'enfermeiro', 'paciente', 'profissional'],
         default: 'paciente'
+    },
+    resetPasswordToken: {
+        type: String,
+        default: null
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: null
     }
 })
 

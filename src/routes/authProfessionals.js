@@ -85,7 +85,7 @@ const user = require('../models/User')
                     service: 'gmail',
                     auth: {
                         user: emailAdmin,
-                        pass: 'ndxdijflzwjhdfdw' // Substitua com uma forma mais segura de gerenciar credenciais
+                        pass: 'lchaxpxppitkjrvs'
                     }
                 });
         

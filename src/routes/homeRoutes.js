@@ -8,7 +8,9 @@ const nodemailer = require('nodemailer')
 
 //Criando rota de tela inicial (Home)
 homeRout.get('/home', (req, res) => {
-    res.render('admin/home')
+    const nomeUser = req.user.nomeuser
+    res.render('admin/home', {nomeUser: nomeUser})
+    
 })
 
 //Criando rota de faq
