@@ -1,3 +1,24 @@
+/*Parte da tela de login e cadastro*/
+
+.localIcon{
+    height: 100px;
+}
+.localIcon img{
+    height: 100%;
+}
+.header-card{
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+/*Parte da homePage*/
+.icon-logo{
+    height: 100%;
+    gap: 20px;
+}
+
+.localIcon img{
+    height: 100%;
+}
 .card-options{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -6,6 +27,8 @@
     position: sticky;
     top: 0;
     z-index: 10;
+    border-bottom: 3px solid #212529a6;
+    border-top: 3px solid #212529;
 }
 .homeBody{
     background-color: #d3d4d4 !important;
@@ -133,4 +156,18 @@ body.bodyLogin{
 .btnSearch{
     background-color: transparent;
     border: 0;
+}
+.localIcons{
+    display: flex !important;
+    flex-direction: row;
+    gap: 20px;
+}
+.localIcons .bi-trash::before,.localIcons .bi-pencil-square{
+    cursor: pointer;
+}
+
+/*Página de listagem de profissionais*/
+
+.pro{
+    border-top: 1px solid #00000038;
 }

@@ -40,6 +40,9 @@ const patientSchema = new Schema({
         type: String,
         required: true
     },
+    sus: {
+        type: String
+    },
     rua: {
         type: String,
     },
@@ -47,6 +50,12 @@ const patientSchema = new Schema({
         type: String
     },
     numlocal: {
+        type: String
+    },
+    estado: {
+        type: String
+    },
+    cep: {
         type: String
     }
 })

@@ -5,6 +5,9 @@ const session = require('express-session')
 const mongoose = require('mongoose')
 const path = require('path')
 const flash = require('connect-flash')
+const passport = require('passport')
+require('./src/config/auth.js')(passport)
+
 
 //Inportando rotas
 const routerAuth = require('./src/routes/authRoutes')
@@ -36,6 +39,10 @@ const app = express()
     //Config. do session
         sessionConfig(app)
 
+    //Config. do Passport
+        app.use(passport.initialize())
+        app.use(passport.session())
+
     //Config. do flash
         app.use(flash())
     
@@ -43,7 +50,8 @@ const app = express()
         app.use((req, res, next) =>{
             res.locals.success_msg = req.flash('success_msg')
             res.locals.error_msg = req.flash('error_msg')
-
+            res.locals.error = req.flash('error')
+            res.locals.user = req.user || null
             next()
         })
     

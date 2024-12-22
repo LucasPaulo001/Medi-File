@@ -1,16 +1,17 @@
 //Importando módulos para a rota de dados do usuário
 const express = require('express')
 const perfilData = express.Router()
-const User = require('../models/User')
+const user = require('../models/User')
 
 //Rotas
-    perfilData.get('/perfilUser', (req, res) => {
-        if(req.session.foundUser){
-            res.render('admin/perfilUser', {data: req.session.foundUser})
+    perfilData.get('/perfilUser', (req, res) => { 
+        if (!req.user) {
+            return res.redirect('/admin/login');  // Redireciona para o login se não estiver autenticado
         }
-        else{
-            res.send('Erro ao requisitar dados')
-        }
+    
+        // Acessando o nome do usuário
+        const nomeUser = req.user.nomeuser || 'Usuário não encontrado';
+        res.render('admin/perfilUser', { nomeUser: nomeUser })
     })
     
 //Exportando a rota

@@ -2,6 +2,7 @@
 
 //Importando o mongoose para fazer a conexão com o banco de dados
 const mongoose = require('mongoose')
+const isAdmin = require('../helpers/isAdmin')
 const Schema = mongoose.Schema
 
 //Criando model
@@ -23,6 +24,10 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    isAdmin: {
+        type: Number,
+        default: 0
     },
     role: {
         type: String,

@@ -18,7 +18,12 @@
         <div class="card p-4 border border-light-subtle">
             {{!-- Forms --}}
             <form class="text-dark" action="/admin/login" method="post">
-                <div>
+                <div class="card-header">
+                    <div class="w-100 header-card localIcon d-flex justify-content-center">
+                        <img src="/assets/images/logoNoBackground.png" alt="" height="100px">
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-center">
                     <h1>Faça seu login</h1>
                 </div><br>
                 <div class="mb-3">
@@ -34,9 +39,9 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100 mt-4">Login</button>
             </form>
-                <div class="d-flex gap-2 mt-4">
+                {{!-- <div class="d-flex gap-2 mt-4">
                     <a href="/admin/professional/login" class="w-100"> 
                         <button type="submit" class="btn btn-primary w-100">Clique aqui (Se caso já for nosso funcionário!)</button>
                     </a>
@@ -45,7 +50,7 @@
                     <a href="/admin/register" class="w-100"> 
                         <button type="submit" class="btn btn-primary w-100">Não tem uma conta? faça o seu cadastro!</button>
                     </a>
-                </div>
+                </div> --}}
         </div>
     </div>
 </body>

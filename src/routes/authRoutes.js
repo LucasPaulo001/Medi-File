@@ -3,11 +3,13 @@ const express = require('express')
 const routerAuth = express.Router()
 const connectDB = require('../config/db')
 const mongoose = require('mongoose')
-const user = require('../models/User')
+const User = require('../models/User')
 const Professional = require('../models/Professional')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
 const professionals = require('./authProfessionals')
+const passport = require('passport')
+const user = require('../models/User')
 
 //Função de conexão ao mongoose
 connectDB()
@@ -18,61 +20,13 @@ routerAuth.get('/login', (req, res) => {
 })
 
 //Rota de login autenticação de dados para login
-routerAuth.post('/login', (req, res) => {
+routerAuth.post('/login', (req, res, next) => {
 
-    //Pegando dados do formulário
-    const {email, password} = req.body
-    let erros = []
-
-    //Configuração de middlware para informar os erros
-    if(!email && typeof email == undefined || email == null){
-        erros.push({text: 'E-mail inválido!'})
-    }
-
-    if(!password && typeof password == undefined || password == null){
-        erros.push({text: 'Senha inválida!'})
-    }
-    if(erros.length > 0){
-        res.render('admin/login', {erros})
-    }
-    console.log(erros)
-    //Buscando dados do email para a autenticação
-    user.findOne({email:email}).then(foundUser => {
-
-        //Verificando se o usuário está no banco de dados
-        if (!foundUser) {
-            req.flash('error_msg', 'Usuário não encontrado')
-            return res.redirect('/admin/login')
-        }
-        
-        //Comparando a senha hash com a senha no hash
-        bcrypt.compare(password, foundUser.password, (error, isMatch) => {
-
-            if(error) throw error
-        
-            //verifica a comparação
-            if(isMatch){
-                req.session.foundUser ={
-                    nome: foundUser.nome,
-                    nomeuser: foundUser.nomeuser,
-                    role: foundUser.role,
-                    email: foundUser.email
-                }
-                //Se a comparação for bem sucedida redireciona para a tela inicial
-                req.flash('success_msg', 'Login feito com sucesso')
-                return res.redirect('/admin/home')
-            }
-            else {
-                // Senha incorreta
-                req.flash('error_msg', 'Senha incorreta!')
-                return res.redirect('/admin/login')
-            }
-        })
-        
-    }).catch(error => {
-       req.flash('error_msg', 'Erro ao tentar fazer login')
-       return res.redirect('/admin/login')
-    })
+    passport.authenticate('local', {
+        successRedirect: "/admin/home",
+        failureRedirect: "/admin/login",
+        failureFlash: true
+    })(req, res, next);
 })
 
 //Rota de registro

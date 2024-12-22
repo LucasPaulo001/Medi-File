@@ -8,13 +8,7 @@ const nodemailer = require('nodemailer')
 
 //Criando rota de tela inicial (Home)
 homeRout.get('/home', (req, res) => {
-    //Pegando os valores de sessão no ato do login
-    if (req.session.foundUser) {
-        res.render('admin/home', { user: req.session.foundUser})
-    }
-    else {
-        res.redirect('/admin/login')
-    }
+    res.render('admin/home')
 })
 
 //Criando rota de faq

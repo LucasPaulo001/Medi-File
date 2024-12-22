@@ -16,7 +16,7 @@ const { isAdmin } = require('../config/permissions')
     // })
     patientRoute.post('/home', isAdmin, (req, res) => {
         //Pegando dados de paciente do forms
-            const {nomePaciente, nomeSocial, dataNascimento, genero, cpf, phone, alergias} = req.body
+            const {nomePaciente, nomeSocial, dataNascimento, genero, cpf, phone, sus, rua, cidade, numlocal, estado, cep} = req.body
 
         //Criando novo paciente
             const formateddate = moment(dataNascimento).format('YYYY-MM-DD')
@@ -28,12 +28,18 @@ const { isAdmin } = require('../config/permissions')
                 genero: genero,
                 cpf: cpf,
                 phone: phone,
-                alergias: alergias
+                sus: sus,
+                rua: rua,
+                cidade: cidade,
+                numlocal: numlocal,
+                estado: estado,
+                cep: cep
             }).save().then(() => {
-                console.log('Paciente cadastrado com sucesso!')
+                req.flash('success_msg', 'Paciente cadastrado com sucesso!')
                 res.redirect('/admin/home')
             }).catch((error) => {
-                console.log(`Houve um erro ao cadastrar paciente ERRO: ${error}`)
+                req.flash('error_msg', 'Houve um erro ao tentar cadastrar o paciente, tente novamente!')
+                res.redirect('/admin/home')
             })
     })
 

@@ -146,6 +146,9 @@ const ProfissionalSchema = new Schema({
     },
     tokenVerificacao: {
         type: String
+    },
+    userId: {
+        type: String
     }
 });
 

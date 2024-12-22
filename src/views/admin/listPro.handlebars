@@ -3,6 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medi-File (Nossos profissionais)</title>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <main class="container p-3">
@@ -10,9 +11,11 @@
         <h1 class="text-dark">Profissionais Cadastrados</h1>
       </div>
         <div class="pro">
-            {{#each profissional}}
+{{#each profissional}}
                 <div class="card cardPro bg-light w-50 mt-4">
                     <div class="card-header">
+                        {{this._id}} <br>
+                        {{this.userId}}
                     <div class="p-3">
                         <img src="/assets/images/profile.png" height="100px"  class="rounded mx-auto d-block" alt=""/>
                     </div>
@@ -27,18 +30,21 @@
                         <li class="list-group-item">Contato: {{this.celular}}</li>
                     </ul>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer d-flex gap-3">
                     <button class="btn btn-primary openMod"
                     onclick="openDetail('{{_id}}')" >Ver detalhes</button>
-                    <button class="btn btn-danger">Remover</button>
+                    <form action="/admin/listPro" method="post">
+                        <input type="hidden" name="userId" value="{{this.userId}}">
+                        <input type="hidden" name="id" value="{{this._id}}">
+                        <button type="submit" class="btn btn-danger">Remover</button>
+                    </form>
                     </div>
                 </div>
-            {{/each}}
         </div>
     </main>
 
     {{!-- detalhes --}}
-    {{#each profissional}}
+
         <div class="proDetails d-flex justify-content-center" onclick="closeWindowExternal('{{_id}}')" id="proDetails-{{_id}}">
             <div class="card overflow-auto w-50 bg-light text-dark" id="details">
                 <i class="bi bi-x-circle closeDetail" onclick="closeWindow('{{_id}}')" id="closeDetail"></i>
@@ -79,7 +85,11 @@
                 </div>
             </div>
         </div>
-    {{/each}}
+{{else}}
+    <div class="container msgNot mt-4 text-dark w-100 d-flex justify-content-center">
+        <h3>Nenhum profissional cadastrado</h3>
+    </div>
+{{/each}}
 
     <script src="/js/windowsDetails.js"></script>
   </body>
