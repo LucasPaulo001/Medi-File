@@ -1,18 +1,21 @@
 //Inportação do express e atribuição da função Router
 const express = require('express')
 const routerAuth = express.Router()
-const connectDB = require('../config/db')
+const connectDB = require('../../config/db')
 const mongoose = require('mongoose')
-const User = require('../models/User')
-const Professional = require('../models/Professional')
+const User = require('../../models/User')
+const Professional = require('../../models/Professional')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
 const professionals = require('./authProfessionals')
 const passport = require('passport')
-const user = require('../models/User')
+const user = require('../../models/User')
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
-const { isError } = require('util')
+const { isNorse } = require('../../helpers/isNorse')
+const routerHomeN = require('../routes_Norse/homeRoutes_N')
+
+const isAdmin = require('../../helpers/isAdmin')
 
 //Função de conexão ao mongoose
 connectDB()
@@ -20,16 +23,36 @@ connectDB()
 //Rota de login renderização de página
 routerAuth.get('/login', (req, res) => {
     res.render('admin/login')
+    
 })
+
+// routerHomeN.get('/home', (req, res) => {
+//     res.render('')
+// })
 
 //Rota de login autenticação de dados para login
 routerAuth.post('/login', (req, res, next) => {
-
-    passport.authenticate('local', {
-        successRedirect: "/admin/home",
-        failureRedirect: "/admin/login",
-        failureFlash: true
-    })(req, res, next);
+    const {email} = req.body
+    user.findOne({email: email}).then((usuario) => {
+        if(!usuario){
+            req.flash('error_msg', 'O usuário não existe!')
+            res.redirect('/admin/login')
+        }
+        if(usuario.role === 'enfermeiro'){
+            passport.authenticate('local', {
+                successRedirect: "/enf/home",
+                failureRedirect: "/admin/login",
+                failureFlash: true
+            })(req, res, next)
+        }
+        else if(usuario.role === 'admin'){
+            passport.authenticate('local', {
+                successRedirect: "/admin/home",
+                failureRedirect: "/admin/login",
+                failureFlash: true
+            })(req, res, next);
+        }
+    })
 })
 
 //Rota de registro

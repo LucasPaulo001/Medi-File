@@ -1,8 +1,8 @@
 //Importando módulos
 const express = require('express')
 const homeRout = express.Router()
-const User = require('../models/User')
-const Professional = require('../models/Professional')
+const User = require('../../models/User')
+const Professional = require('../../models/Professional')
 const nodemailer = require('nodemailer')
 
 

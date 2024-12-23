@@ -4,20 +4,20 @@ const professionals = express.Router()
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 const nodemailer = require('nodemailer')
-const Professional = require('../models/Professional')
-const User = require('../models/User')
-const {isAdmin} = require('../helpers/isAdmin')
+const Professional = require('../../models/Professional')
+const User = require('../../models/User')
+const {isAdmin} = require('../../helpers/isAdmin')
 const { ModifiedPathsSnapshot } = require('mongoose')
-const user = require('../models/User')
+const user = require('../../models/User')
 //Criação de rota
     professionals.get('/registerPro', isAdmin, (req, res) => {
         res.render('admin/proRegistration')
     })
     const erros = []
-    professionals.post('/registerPro', isAdmin, (req, res) => {
+    professionals.post('/registerPro', (req, res) => {
         // Pegando dados do formulário
         const {
-            nome, nomeuser, cpfDoProfissional, dataNascimentoProfissional, generoProfissional, outroGenero, rua, numero, complemento, bairro, cidade, estado, cep, telefone, celular, email, emailVerificado, role, crm, corem, especialidadeMedica, nomeDeUsuario, password, passwordConfirm, emailAdmin
+            nome, nomeuser, cpfDoProfissional, dataNascimentoProfissional, generoProfissional, outroGenero, rua, numero, complemento, bairro, cidade, estado, cep, telefone, celular, email, emailVerificado, role, crm, corem, especialidadeMedica, nomeDeUsuario, password,  passwordConfirm, emailAdmin
         } = req.body;
     
         // Comparando senhas
@@ -39,7 +39,7 @@ const user = require('../models/User')
                 nome: nome,
                 nomeuser: nomeuser,
                 email: email,
-                password: password,
+                password: hashedPassword,
                 role: role
             })
             newUser.save()

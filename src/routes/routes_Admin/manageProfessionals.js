@@ -1,8 +1,8 @@
 const express = require('express')
 const routePro = express.Router()
-const proData = require('../models/Professional')
-const User = require('../models/User')
-const {isAdmin} = require('../helpers/isAdmin')
+const proData = require('../../models/Professional')
+const User = require('../../models/User')
+const {isAdmin} = require('../../helpers/isAdmin')
 
 //Criando rota de listagem de profissionais
 routePro.get('/listPro', isAdmin, (req, res) => {

@@ -1,7 +1,7 @@
 const express = require('express')
 const professionals = express.Router()
-const Professional = require('../models/Professional')
-const User = require('../models/User')
+const Professional = require('../../models/Professional')
+const User = require('../../models/User')
 const bcrypt = require('bcrypt')
 
 //________________________________________________________________________

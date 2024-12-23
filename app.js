@@ -1,6 +1,7 @@
 //Inportação de módulos
 const express = require('express')
 const handlebars = require('express-handlebars')
+const hbs = require('handlebars')
 const session = require('express-session')
 const mongoose = require('mongoose')
 const path = require('path')
@@ -8,28 +9,49 @@ const flash = require('connect-flash')
 const passport = require('passport')
 require('./src/config/auth.js')(passport)
 
-
 //Inportando rotas
-const routerAuth = require('./src/routes/authRoutes')
-const homeRoutes = require('./src/routes/homeRoutes')
-const registerPatientRoutes = require('./src/routes/registerPatient')
-const patientList = require('./src/routes/patientList')
-const perfilUser = require('./src/routes/perfilUser')
-const proRegister = require('./src/routes/authProfessionals')
-const proLogin = require('./src/routes/loginProfessionals')
-const proList = require('./src/routes/manageProfessionals')
+    //Rotas de Admin
+        const routerAuth = require('./src/routes/authRoutes')
+        const homeRoutes = require('./src/routes/homeRoutes')
+        const registerPatientRoutes = require('./src/routes/registerPatient')
+        const patientList = require('./src/routes/patientList')
+        const perfilUser = require('./src/routes/perfilUser')
+        const proRegister = require('./src/routes/authProfessionals')
+        const proLogin = require('./src/routes/loginProfessionals')
+        const proList = require('./src/routes/manageProfessionals')
 
-const connectDB = require('./src/config/db')
-const sessionConfig = require('./src/config/session')
-const app = express()
+    //Rotas de Enfermeiro
+        const routerHomeN = require('./src/routes/routes_Norse/homeRoutes_N.js')
+
+    //Rotas de Médicos
+
+    //Rotas de recepcionistas
+        const routerRec = require('./src/routes/route_Receptionist/authRec.js')
+
+    //Importação de configurações
+        const connectDB = require('./src/config/db')
+        const sessionConfig = require('./src/config/session')
+    
+    //Função express para configurações de servidor
+        const app = express()
 
 //Configurações
     //Parser de json e de dados de formulários
         app.use(express.json())
         app.use(express.urlencoded({extended: true}))
-    
+
+    //helper de condições complexas para o handlebars
+    hbs.registerHelper("eq", function (a, b) {
+        return a === b;
+      });
+
     //Config. do handlebars
-        app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
+        app.engine('handlebars', handlebars.engine({defaultLayout: 'main',
+            runtimeOptions: {
+                allowProtoPropertiesByDefault: true,
+                allowProtoMethodsByDefault: true,
+            }
+        }))
         app.set('view engine', 'handlebars')
         app.set('views', __dirname + '/src/views')
 
@@ -94,6 +116,15 @@ const app = express()
 
         //Rota de gerenciamento de profissionais
         app.use('/admin', proList)
+
+
+        //ROTAS DE ENFERMEIROS
+        app.use('/enf', routerHomeN)
+
+        //ROTAS DE MÉDICOS
+
+        //ROTAS DE RECEPCIONISTAS
+        app.use('/rec', routerRec)
 
 //Configuração de conexão ao servidor
 const PORT = 8081

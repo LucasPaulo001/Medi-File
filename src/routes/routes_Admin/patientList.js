@@ -2,9 +2,9 @@
 const express = require('express')
 const patientList = express.Router()
 const mongoose = require('mongoose')
-const Paciente = require('../models/Patient')
+const Paciente = require('../../models/Patient')
 //const isAdmin = require('../helpers/isAdmin')
-const {isAdmin} = require('../helpers/isAdmin')
+const {isAdmin} = require('../../helpers/isAdmin')
 
 //Configuração de rota para listar pacientes
     //Autorização para administradores terem acesso à página

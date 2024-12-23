@@ -1,11 +1,11 @@
 //Importação de módulo express para fazer as rotas
 const express = require('express')
 const mongoose = require('mongoose')
-const connectDB = require('../config/db')
+const connectDB = require('../../config/db')
 const moment = require('moment')
 const patientRoute = express.Router()
-const Paciente = require('../models/Patient')
-const {isAdmin} = require('../helpers/isAdmin')
+const Paciente = require('../../models/Patient')
+const {isAdmin} = require('../../helpers/isAdmin')
 
 //Conectando ao banco de dados
     connectDB()

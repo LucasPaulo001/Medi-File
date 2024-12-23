@@ -1,7 +1,7 @@
 //Importando módulos para a rota de dados do usuário
 const express = require('express')
 const perfilData = express.Router()
-const user = require('../models/User')
+const user = require('../../models/User')
 
 //Rotas
     perfilData.get('/perfilUser', (req, res) => { 

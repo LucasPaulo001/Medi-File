@@ -10,5 +10,16 @@
     "nodemailer": "^6.9.16",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
-  }
+  },
+  "name": "medi-file",
+  "version": "1.0.0",
+  "description": "Aplicação de cadastro de pacientes",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
