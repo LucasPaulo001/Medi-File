@@ -113,8 +113,7 @@ const ProfissionalSchema = new Schema({
     role: {
         type: String,
         required: true,
-        enum: ['admin', 'medico', 'enfermeiro', 'profissional'],
-        default: 'profissional'
+        enum: ['admin', 'medico', 'enfermeiro', 'recepcionista']
     },
     crm: {
         type: String,

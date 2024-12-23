@@ -11,14 +11,14 @@ require('./src/config/auth.js')(passport)
 
 //Inportando rotas
     //Rotas de Admin
-        const routerAuth = require('./src/routes/authRoutes')
-        const homeRoutes = require('./src/routes/homeRoutes')
-        const registerPatientRoutes = require('./src/routes/registerPatient')
-        const patientList = require('./src/routes/patientList')
-        const perfilUser = require('./src/routes/perfilUser')
-        const proRegister = require('./src/routes/authProfessionals')
-        const proLogin = require('./src/routes/loginProfessionals')
-        const proList = require('./src/routes/manageProfessionals')
+        const routerAuth = require('./src/routes/routes_Admin/authRoutes.js')
+        const homeRoutes = require('./src/routes/routes_Admin/homeRoutes.js')
+        const registerPatientRoutes = require('./src/routes/routes_Admin/registerPatient.js')
+        const patientList = require('./src/routes/routes_Admin/patientList.js')
+        const perfilUser = require('./src/routes/routes_Admin/perfilUser.js')
+        const proRegister = require('./src/routes/routes_Admin/authProfessionals.js')
+        const proLogin = require('./src/routes/routes_Admin/loginProfessionals.js')
+        const proList = require('./src/routes/routes_Admin/manageProfessionals.js')
 
     //Rotas de Enfermeiro
         const routerHomeN = require('./src/routes/routes_Norse/homeRoutes_N.js')

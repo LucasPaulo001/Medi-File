@@ -31,8 +31,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'medico', 'enfermeiro', 'paciente', 'profissional'],
-        default: 'paciente'
+        enum: ['admin', 'medico', 'enfermeiro', 'recepcionista'],
     },
     resetPasswordToken: {
         type: String,

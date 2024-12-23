@@ -16,6 +16,7 @@ const { isNorse } = require('../../helpers/isNorse')
 const routerHomeN = require('../routes_Norse/homeRoutes_N')
 
 const isAdmin = require('../../helpers/isAdmin')
+const { nextTick } = require('process')
 
 //Função de conexão ao mongoose
 connectDB()
@@ -51,6 +52,13 @@ routerAuth.post('/login', (req, res, next) => {
                 failureRedirect: "/admin/login",
                 failureFlash: true
             })(req, res, next);
+        }
+        else if(usuario.role === 'recepcionista'){
+            passport.authenticate('local', {
+                successRedirect: "/rec/home",
+                failureRedirect: "/admin/login",
+                failureFlash: true
+            })(req, res, next)
         }
     })
 })

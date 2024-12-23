@@ -49,7 +49,7 @@ const {isAdmin} = require('../../helpers/isAdmin')
     })
 
     //Enviando os dados da edição para os dados do banco
-    patientList.post('/patientList/edit', isAdmin, (req, res) => {
+    patientList.post('/patientList/edit', (req, res) => {
         Paciente.findOne({_id: req.body.id}).then((dados) => {
             dados.nomePaciente = req.body.nomePaciente
             dados.nomeSocial = req.body.nomeSocial

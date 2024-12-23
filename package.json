@@ -2,6 +2,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
+    "dayjs": "^1.11.13",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
@@ -15,7 +16,6 @@
   "version": "1.0.0",
   "description": "Aplicação de cadastro de pacientes",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
