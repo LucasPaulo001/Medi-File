@@ -21,7 +21,7 @@ const user = require('../../models/User')
             const {nomePaciente, nomeSocial, dataNascimento, genero, cpf, phone, sus, rua, cidade, numlocal, estado, cep} = req.body
 
         //Criando novo paciente
-            const formatedDate = dayjs(dataNascimento).format('YYYY-MM-DD')
+            const formatedDate = dayjs(dataNascimento).format('DD-MM-YYYY')
             
             new Paciente({
                 nomePaciente: nomePaciente,
