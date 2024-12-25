@@ -11,40 +11,44 @@
         <h1 class="text-dark">Profissionais Cadastrados</h1>
       </div>
         <div class="pro">
-{{#each profissional}}
-                <div class="card cardPro bg-light w-50 mt-4">
-                    <div class="card-header">
-                        {{this._id}} <br>
-                        {{this.userId}}
-                    <div class="p-3">
-                        <img src="/assets/images/profile.png" height="100px"  class="rounded mx-auto d-block" alt=""/>
-                    </div>
-                    <div class="namePro">
-                        <h3>{{this.nome}}</h3>
-                    </div>
-                    </div>
-                    <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item disabled" aria-disabled="true">Cargo: <span class="text-success">{{this.role}}</span></li>
-                        <li class="list-group-item">Especialidade: {{this.especialidadeMedica}}</li>
-                        <li class="list-group-item">Contato: {{this.celular}}</li>
-                    </ul>
-                    </div>
-                    <div class="card-footer d-flex gap-3">
-                    <button class="btn btn-primary openMod"
-                    onclick="openDetail('{{_id}}')" >Ver detalhes</button>
-                    <form action="/admin/listPro" method="post">
-                        <input type="hidden" name="userId" value="{{this.userId}}">
-                        <input type="hidden" name="id" value="{{this._id}}">
-                        <button type="submit" class="btn btn-danger">Remover</button>
-                    </form>
-                    </div>
-                </div>
+        {{#each profissional}}
+        <div class="card cardPro bg-light w-50 mt-4">
+            <div class="card-header">
+            <div class="p-3">
+                <img src="/assets/images/profile.png" height="100px"  class="rounded mx-auto d-block" alt=""/>
+            </div>
+            <div class="namePro">
+                <h3>{{this.nome}}</h3>
+            </div>
+            </div>
+            <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item disabled" aria-disabled="true">Cargo: <span class="text-success">{{this.role}}</span></li>
+                <li class="list-group-item">Especialidade: {{this.especialidadeMedica}}</li>
+                <li class="list-group-item">Contato: {{this.celular}}</li>
+            </ul>
+            </div>
+            <div class="card-footer d-flex gap-3">
+            <button class="btn btn-primary openMod"
+            onclick="openDetail('{{_id}}')" >Ver detalhes</button>
+            <form action="/admin/listPro" method="post">
+                <input type="hidden" name="userId" value="{{this.userId}}">
+                <input type="hidden" name="id" value="{{this._id}}">
+                <button type="submit" class="btn btn-danger">Remover</button>
+            </form>
+            </div>
         </div>
+    </div>
+    {{else}}
+    <div class="container msgNot mt-4 text-dark w-100 d-flex justify-content-center">
+        <h3>Nenhum profissional cadastrado</h3>
+    </div>
+    {{/each}}
     </main>
 
-    {{!-- detalhes --}}
 
+    {{!-- detalhes --}}
+    {{#each profissional}}
         <div class="proDetails d-flex justify-content-center" onclick="closeWindowExternal('{{_id}}')" id="proDetails-{{_id}}">
             <div class="card overflow-auto w-50 bg-light text-dark" id="details">
                 <i class="bi bi-x-circle closeDetail" onclick="closeWindow('{{_id}}')" id="closeDetail"></i>
@@ -85,11 +89,8 @@
                 </div>
             </div>
         </div>
-{{else}}
-    <div class="container msgNot mt-4 text-dark w-100 d-flex justify-content-center">
-        <h3>Nenhum profissional cadastrado</h3>
-    </div>
-{{/each}}
+    {{/each}}
+    
 
     <script src="/js/windowsDetails.js"></script>
   </body>

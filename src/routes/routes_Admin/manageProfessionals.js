@@ -21,20 +21,20 @@ routePro.post('/listPro', (req, res) => {
     proData.deleteOne({_id: req.body.id}).lean().then(() => {
         User.deleteOne({_id: req.body.userId}).lean().then(() => {
             req.flash('success_msg', 'Profissional deletado e acesso removido com sucesso!')
-            res.redirect('/admin/home')
+            return res.redirect('/admin/home')
         })
     }).catch(() => {
         req.flash('error_msg', 'Erro ao deletar profissional, por favor tente novamente!')
     })
 
     //Deletando o acesso ao sistema do profissional
-    // User.deleteOne({_id: req.body.userId}).lean().then(() => {
-    //     req.flash('success_msg', 'Profissional com acesso removido do sistema!')
-    //     res.redirect('/admin/home')
-    // }).catch(() => {
-    //     req.flash('error_msg', 'Erro ao deletar profissional, por favor tente novamente!')
-    //     res.redirect('/admin/home')
-    // })
+    User.deleteOne({_id: req.body.userId}).lean().then(() => {
+        req.flash('success_msg', 'Profissional com acesso removido do sistema!')
+        res.redirect('/admin/home')
+    }).catch(() => {
+        req.flash('error_msg', 'Erro ao deletar profissional, por favor tente novamente!')
+        res.redirect('/admin/home')
+    })
 })
 
 

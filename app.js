@@ -28,6 +28,9 @@ require('./src/config/auth.js')(passport)
     //Rotas de recepcionistas
         const routerRec = require('./src/routes/route_Receptionist/authRec.js')
 
+    //Rotas padrões às funções
+        const defaultRoute = require('./src/routes/defaultRoutes/defaultConfigs.js')
+
     //Importação de configurações
         const connectDB = require('./src/config/db')
         const sessionConfig = require('./src/config/session')
@@ -125,6 +128,9 @@ require('./src/config/auth.js')(passport)
 
         //ROTAS DE RECEPCIONISTAS
         app.use('/rec', routerRec)
+
+        //ROTAS PADRÕES
+        app.use('/page', defaultRoute)
 
 //Configuração de conexão ao servidor
 const PORT = 8081

@@ -40,6 +40,7 @@ routerAuth.post('/login', (req, res, next) => {
             res.redirect('/admin/login')
         }
         if(usuario.role === 'enfermeiro'){
+            console.log(usuario.role)
             passport.authenticate('local', {
                 successRedirect: "/enf/home",
                 failureRedirect: "/admin/login",

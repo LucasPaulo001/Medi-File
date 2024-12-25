@@ -68,4 +68,8 @@ routeRec.post('/patientList' ,(req, res) => {
     })
 })
 
+routeRec.get('/faq', (req, res) => {
+    res.render('rec/faq')
+})
+
 module.exports = routeRec
