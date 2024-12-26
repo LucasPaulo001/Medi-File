@@ -73,5 +73,6 @@ const user = require('../../models/User')
             res.redirect('/admin/patientList')
         })
     })
+
 //Exportando rota
 module.exports = patientList

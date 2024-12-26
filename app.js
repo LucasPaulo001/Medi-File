@@ -71,7 +71,7 @@ require('./src/config/auth.js')(passport)
     //Config. do flash
         app.use(flash())
     
-    //Config. de Middlware de mensagens 
+    //Config. de Middlware de mensagens | variáveis globais
         app.use((req, res, next) =>{
             res.locals.success_msg = req.flash('success_msg')
             res.locals.error_msg = req.flash('error_msg')

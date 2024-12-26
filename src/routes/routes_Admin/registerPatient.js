@@ -20,13 +20,14 @@ const user = require('../../models/User')
         //Pegando dados de paciente do forms
             const {nomePaciente, nomeSocial, dataNascimento, genero, cpf, phone, sus, rua, cidade, numlocal, estado, cep} = req.body
 
+            const [dia, mes, ano] = dataNascimento.split('-');
         //Criando novo paciente
-            const formatedDate = dayjs(dataNascimento).format('DD-MM-YYYY')
+            const formatedDate = dayjs(`${ano}-${mes}-${dia}`, 'YYYY,MM,DD')
             
             new Paciente({
                 nomePaciente: nomePaciente,
                 nomeSocial: nomeSocial,
-                dataNascimento: formatedDate,
+                dataNascimento: dataNascimento,
                 genero: genero,
                 cpf: cpf,
                 phone: phone,
@@ -48,8 +49,9 @@ const user = require('../../models/User')
                 return res.redirect(redirectRole[role] || '/');
 
             }).catch((error) => {
+                console.log(`erro: ${error}`)
                 req.flash('error_msg', 'Houve um erro ao tentar cadastrar o paciente, tente novamente!')
-                res.redirect('back')
+                res.redirect(req.get('Referrer') || '/');
             })
     })
 
