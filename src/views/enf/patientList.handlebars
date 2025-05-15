@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi-File (Lista de pacientes)</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <main>
+        <div class="text-dark w-100 d-flex justify-content-center mt-4">
+            <h1>Lista de Pacientes</h1>
+        </div>
+        <div class="mt-4">
+            <div class="w-100 d-flex">
+                    <form action="/page/searchPatients" method="get" class="search bg-light card w-100 p-4 d-flex justify-content-center">
+                        <button class="btnSearch" type="submit"><i class="bi bi-search searchIcon"></i></button>
+                        <input placeholder="Buscar Paciente" type="search" class="form-control w-50">
+                    </form>
+                </form>
+            </div>
+        {{#each pacientes}}
+            <div class="accordion container mt-4" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{this._id}}" aria-expanded="false" aria-controls="collapse-{{this._id}}">
+                    <h3>Dados do paciente: {{this.nomePaciente}}</h3>
+                </button>
+                </h2>
+                <div id="collapse-{{this._id}}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Nome Social:</strong> {{this.nomeSocial}}</li>
+                        <li class="list-group-item"><strong>Data de nascimento:</strong> {{this.dataNascimento}}</li>
+                        <li class="list-group-item"><strong>Gênero:</strong> {{this.genero}}</li>
+                        <li class="list-group-item"><strong>CPF:</strong> {{this.cpf}}</li>
+                        <li class="list-group-item"><strong>SUS:</strong> {{this.sus}}</li>
+                        <li class="list-group-item"><strong>Rua:</strong> {{this.rua}}</li>
+                        <li class="list-group-item"><strong>Cidade:</strong> {{this.cidade}}</li>
+                        <li class="list-group-item"><strong>Estado:</strong> {{this.estado}}</li>
+                        <li class="list-group-item"><strong>CEP:</strong> {{this.cep}}</li>
+                    </ul>
+                    <div class="card localIcons text-light p-3 w-100 justify-content-center align-items-center">
+                        <form action="/admin/patientList" method="post">
+                            
+                            <input type="hidden" name="id" value="{{this._id}}">
+                            <button title="Ao clicar você deletará todos os dados deste paciente" type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                        <a title="Ao clicar você poderá editar os dados deste paciente" href="/admin/patientList/edit/{{this._id}}"><button class="btn btn-primary">Editar</button></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            {{else}}
+                <div class="container d-flex mt-4 w-100 justify-content-center align-items-center text-dark">
+                    <h4>Nenhum paciente cadastrado</h4>
+                </div>
+        
+        {{/each}}
+        </div>
+    </main>
+</body>
+</html>

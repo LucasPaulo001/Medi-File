@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi-File (Edição de dados do Paciente)</title>
+</head>
+<body>
+    <div class="container w-100 d-flex justify-content-center mt-4">
+        <div class="card cardCadPaciente bg-light p-4">
+            <h2>Editar dados do paciente</h2>
+            <div class="bodyForm container p-4">
+                <div class="card bg-light p-4">
+                    <form action="/rec/patientList/edit" method="post">
+                        <input type="hidden" name="id" value="{{dados._id}}">
+                        <div class="mb-3">
+                            <label for="nomePaciente">Nome Completo:</label>
+                            <input type="text" required class="form-control" value="{{dados.nomePaciente}}" name="nomePaciente" id="nomePaciente">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nomePaciente">Nome Social:</label>
+                            <input type="text" required class="form-control" value="{{dados.nomeSocial}}" name="nomeSocial" id="nomePaciente">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dataNascimento">Data de Nascimento:</label>
+                            <input type="date" required class="form-control" value="{{dados.dataNascimento}}" name="dataNascimento" id="dataNascimento">
+                        </div>
+                        <div class="card bg-light mb-3 p-4">
+                            <label for="genero" class="form-label">Gênero:</label>
+                            <select class="form-select" id="genero" value="{{dados.genero}}" name="genero" required>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="card bg-light p-4 mt-4">
+                            <div class="mb-3">
+                                <label for="cpf">CPF:</label>
+                                <input type="text" class="form-control" value="{{dados.cpf}}" name="cpf" id="cpf">
+                            </div>
+                        </div>
+                        <div class="card bg-light p-4 mt-4">
+                            <div class="mb-3">
+                                <label for="phone">Telefone:</label>
+                                <input type="tel" class="form-control" value="{{dados.phone}}" name="phone" id="phone">
+                            </div>
+                        </div>
+                        <div class="card bg-light mt-4 p-4">
+                            <label for="sus">SUS (Sistema Único de Saúde):</label>
+                            <input type="text" name="sus" id="sus" value="{{dados.sus}}" class="form-control">
+                        </div>
+                        <div class="card bg-light mt-4 p-4">
+                            <h2>Localização</h2>
+                            <div class="container w-100 d-flex gap-3">
+                                <div class="mb-3 mt-4 w-50">
+                                    <label for="rua">Rua:</label>
+                                    <input type="text" value="{{dados.rua}}" name="rua" id="rua" class="form-control">
+                                </div>
+                                <div class="mb-3 mt-4 w-50">
+                                    <label for="cidade">Cidade:</label>
+                                    <input type="text" value="{{dados.cidade}}" name="cidade" id="cidade" class="form-control">
+                                </div>
+                            </div>
+                            <div class="container d-flex w-100 gap-3">
+                                <div class="mb-3 w-100">
+                                    <label for="numlocal">Número</label>
+                                    <input type="text" class="form-control" value="{{dados.numlocal}}" name="numlocal" id="numlocal">
+                                </div>
+                                <div class="mb-3 w-100">
+                                    <label for="estado">Estado</label>
+                                    <input type="text" class="form-control" value="{{dados.estado}}" name="estado" id="estado">
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="mb-3 w-50">
+                                    <label for="cep">CEP</label>
+                                    <input type="text" class="form-control" value="{{dados.cep}}" name="cep" id="cep">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-4 w-100 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success">Editar Registro</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

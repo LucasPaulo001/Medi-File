@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi-File (perfil do Usuário)</title>
+</head>
+<body>
+    <div class="container mt-4 w-100 d-flex justify-content-center">
+        <div class="card p-3 w-100 bg-light">
+            <div class="bg-dark rounded p-2 text-light">
+                <h2>Seus dados</h2>
+            </div>
+            <ul class="list-group mt-4 list-group-flush">
+                <li class="list-group-item">Nome Completo: <strong>{{nome}}</strong></li>
+                <li class="list-group-item">Nome de usuário: <strong>{{nomeuser}}</strong></li>
+                <li class="list-group-item">E-mail: <strong>{{email}}</strong></li>
+                <li class="list-group-item">Função no Sistema: <span class="text-success">{{role}}</span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <main class="container mt-4">
+        {{!-- Card de boas vindas --}}
+        <section class="d-block w-100 justify-content-center align-items-center">
+                <div class="card cardWelcome d-flex justify-content-center align-items-center  p-4 text-dark border-light-subtle">
+                    <h2>Bem vido(a) ao Medi-File, {{user.nomeuser}}!</h2><br>
+                    <span id="messege"></span>
+                </div>
+                {{!-- Card para cadastrar pacientes --}}
+            <div class="card-options container w-100 gap-4 mt-4">
+                <div class="card-content card p-3 w-100 text-dark">
+                    <div class="title-card">
+                        <h2>Gerenciar Pacientes</h2>
+                    </div>
+                    <div class="icon">
+                        <img src="/assets/images/cuidados-de-saude.png" alt="">
+                    </div>
+                    <div class="description mt-4">
+                        <h3>Acesse e gerencie os dados dos pacientes que estão sob seus cuidados.</h3>
+                        <div class="w-100 d-flex align-items-center justify-content-center mt-4">
+                           <a href="/enf/patientList"><button class="btn btn-success">Detalhes</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/hourMsg.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medi-File</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  
+  <nav class="header navbar navbar-expand-lg bg-light p-1" data-bs-theme="light">
+    <div class="container-fluid gap-5">
+      <div class="icon-logo d-flex align-items-center">
+        {{!-- Condição de link para admin --}}
+        {{#if (eq user.role "admin")}}
+        <div class="statusFunction">
+          <small class="text-success">Painel do admin</small>
+          <a href="/admin/home">
+            <div class="localIcon-home">
+              <img src="/assets/images/logoNoBackground.png" alt="" height="70px">
+            </div>
+          </a>
+        </div>
+        {{!-- Condição de link para enfermeiro --}}
+          {{else if (eq user.role "enfermeiro")}}
+          <div class="statusFunction">
+            <small class="text-success">Painel do Enfermeiro</small>
+            <a href="/enf/home">
+              <div class="localIcon-home">
+                <img src="/assets/images/logoNoBackground.png" alt="" height="70px">
+              </div>
+            </a>
+          </div>
+          {{else if (eq user.role "recepcionista")}}
+            <div class="statusFunction">
+            <small class="text-success">Painel do Recepcionista</small>
+            <a href="/rec/home">
+              <div class="localIcon-home">
+                <img src="/assets/images/logoNoBackground.png" alt="" height="70px">
+              </div>
+            </a>
+          </div>
+        {{/if}}
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark">
+          <li class="nav-item">
+            {{!-- Condição de link para admin --}}
+            {{#if (eq user.role "admin")}}
+              <a class="nav-link active" aria-current="page" href="/admin/home">Início</a>
+
+              {{!-- Condição de link para enfermeiro --}}
+            {{else if (eq user.role "enfermeiro")}}
+              <a class="nav-link active" aria-current="page" href="/enf/home">Início</a>
+
+              {{!-- Condição de links para recepcionistas --}}
+            {{else if (eq user.role "recepcionista")}}
+              <a class="nav-link active" aria-current="page" href="/rec/home">Início</a>
+            {{/if}}
+
+          </li>
+          <li class="nav-item">
+            {{!-- Condição de link para admin --}}
+            {{#if (eq user.role "admin")}}
+              <a class="nav-link" aria-current="page" href="/admin/home">Agenda de profissionais</a>
+
+            {{!-- Condição de link para recepcionistas --}}
+            {{else if (eq user.role "recepcionista")}}
+              <a class="nav-link" aria-current="page" href="/rec/home">Agenda de profissionais</a>
+            {{/if}}
+          </li>
+          <li class="nav-item">
+            {{!-- Condição de link para admin --}}
+            {{#if (eq user.role "admin")}}
+              <a class="nav-link" aria-current="page" href="/admin/faq">FAQ</a>
+
+              {{!-- Condição de link para enfermeiro --}}
+            {{else if (eq user.role "enfermeiro")}}
+              <a class="nav-link" aria-current="page" href="/enf/faq">FAQ</a>
+
+            {{!-- Condição de link para recepcionistas --}}
+            {{else if (eq user.role "recepcionista")}}
+            <a class="nav-link" aria-current="page" href="/rec/faq">FAQ</a>
+
+            {{/if}}
+          </li>
+          {{!-- Condição de link para admin --}}
+          {{#if (eq user.role "admin")}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Perfil de usuário
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/admin/perfilUser">Ver Perfil</a></li>
+              <li><a class="dropdown-item" href="/page/settingAccount">Configurações de Conta</a></li>
+              <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+              <li><a class="dropdown-item" href="/admin/help">Ajuda</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/logout">Sair</a></li>
+            </ul>
+          </li>
+          {{!-- Condição de link para enfermeiro --}} 
+          {{else if (eq user.role "enfermeiro")}}
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Perfil de usuário
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/enf/perfilUser">Ver Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Configurações</a></li>
+              <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+              <li><a class="dropdown-item" href="/enf/help">Ajuda</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/logout">Sair</a></li>
+            </ul>
+          </li>
+
+          {{!-- Condição de links para recepsionistas --}}
+          {{else if (eq user.role "recepcionista")}}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Perfil de usuário
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/rec/perfilUser">Ver Perfil</a></li>
+                <li><a class="dropdown-item" href="/page/settingAccount">Configurações de Conta</a></li>
+                <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                <li><a class="dropdown-item" href="/rec/help">Ajuda</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/admin/logout">Sair</a></li>
+              </ul>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</body>
+</html>

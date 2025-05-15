@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página inicial</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="homeBody">
+    {{#each error}}
+        <div class="alert alert-danger">{{this.text}}</div>
+    {{else}}
+
+    {{/each}}
+    <main class="container mt-4">
+        {{!-- Card de boas vindas --}}
+        <section class="d-block w-100 justify-content-center align-items-center">
+                <div class="card cardWelcome d-flex justify-content-center align-items-center  p-4 text-dark border-light-subtle">
+                    <h2>Bem vido(a) ao Medi-File, {{user.nomeuser}}!</h2><br>
+                    <span id="messege"></span>
+                </div>
+                {{!-- Card para cadastrar pacientes --}}
+            <div class="card-options container w-100 gap-4 mt-4">
+                <div class="card-content card p-3 w-100 text-dark">
+                    <div class="title-card">
+                        <h2>Cadastre pacientes</h2>
+                    </div>
+                    <div class="icon">
+                        <img src="/assets/images/cuidados-de-saude.png" alt="">
+                    </div>
+                    <div class="description mt-4">
+                        <h3>Registre rapidamente novos pacientes com informações essenciais.</h3>
+                        <div class="w-100 d-flex align-items-center justify-content-center mt-4">
+                           <button onclick="openModal()" class="btn btn-success">Registrar</button>
+                        </div>
+                    </div>
+                </div>
+                {{!-- Card para gerenciar os pacientes cadastrados --}}
+                <div class="card-content card p-3 w-100 text-dark">
+                    <div class="title-card">
+                        <h2>Veja a lista de Pacientes Cadastrados</h2>
+                    </div>
+                    <div class="icon">
+                        <img src="/assets/images/paciente.png" alt="">
+                    </div>
+                    <div class="description mt-4">
+                        <h3>Gerencie os pacientes já cadastrados no sistema.</h3>
+                        <div class="w-100 d-flex align-items-center justify-content-center mt-4">
+                            <a href="/rec/patientList"><button class="btn btn-success">Gerenciar</button></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+    {{!-- Janelas modais --}}
+    {{!-- Janela modal de cadastro de paciente --}}
+    <div class="windowExternal" id="windowExternal">
+        <div class="windowInternal w-100" id="windowInternal">
+            <div class="card cardCadPaciente bg-light p-4">
+                <i class="bi bi-x-circle close" id="closeWindow"></i>
+                <div class="bodyForm container p-4">
+                    <div class="card bg-light p-4">
+                        <form action="/admin/home" method="post">
+                            <div class="mb-3">
+                                <label for="nomePaciente">Nome Completo:</label>
+                                <input type="text" required class="form-control" name="nomePaciente" id="nomePaciente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="nomePaciente">Nome Social:</label>
+                                <input type="text" required class="form-control" name="nomeSocial" id="nomePaciente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="dataNascimento">Data de Nascimento:</label>
+                                <input type="date"required class="form-control" name="dataNascimento" id="dataNascimento">
+                            </div>
+
+                            <div class="card bg-light mb-3 p-4">
+                                <label for="genero" class="form-label">Gênero:</label>
+                                <select class="form-select" id="genero" name="genero" required>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="card bg-light p-4 mt-4">
+                                <div class="mb-3">
+                                    <label for="cpf">CPF:</label>
+                                    <input type="text" class="form-control" name="cpf" id="cpf">
+                                </div>
+                            </div>
+                            <div class="card bg-light p-4 mt-4">
+                                <div class="mb-3">
+                                    <label for="phone">Telefone:</label>
+                                    <input type="tel" class="form-control" name="phone" id="phone">
+                                </div>
+                            </div>
+                            <div class="card bg-light mt-4 p-4">
+                                <label for="sus">SUS (Sistema Único de Saúde):</label>
+                                <input type="text" name="sus" id="sus" class="form-control">
+                            </div>
+                            <div class="card bg-light mt-4 p-4">
+                                <h2>Localização</h2>
+                                <div class="container w-100 d-flex gap-3">
+                                    <div class="mb-3 mt-4 w-50">
+                                        <label for="rua">Rua:</label>
+                                        <input type="text" name="rua" id="rua" class="form-control">
+                                    </div>
+                                    <div class="mb-3 mt-4 w-50">
+                                        <label for="cidade">Cidade:</label>
+                                        <input type="text" name="cidade" id="cidade" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="container d-flex w-100 gap-3">
+                                    <div class="mb-3 w-100">
+                                        <label for="numlocal">Número</label>
+                                        <input type="text" class="form-control" name="numlocal" id="numlocal">
+                                    </div>
+                                    <div class="mb-3 w-100">
+                                        <label for="estado">Estado</label>
+                                        <input type="text" class="form-control" name="estado" id="estado">
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="mb-3 w-50">
+                                        <label for="cep">CEP</label>
+                                        <input type="text" class="form-control" name="cep" id="cep">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 p-4 w-100 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-success">Confirmar Registro</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark p-4 mt-4 w-100 d-flex justify-content-center">
+        <a href="https://www.flaticon.com/br/icones-gratis/saude" title="saúde ícones">Saúde ícones criados por Freepik - Flaticon</a>
+    </footer>
+
+    <script src="/js/windowsHome.js"></script>
+    <script src="/js/hourMsg.js"></script>
+</body>
+</html>
