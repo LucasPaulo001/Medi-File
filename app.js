@@ -8,6 +8,7 @@ const path = require('path')
 const flash = require('connect-flash')
 const passport = require('passport')
 require('./src/config/auth.js')(passport)
+require("dotenv").config()
 
 //Inportando rotas
     //Rotas de Admin
@@ -133,7 +134,7 @@ require('./src/config/auth.js')(passport)
         app.use('/page', defaultRoute)
 
 //Configuração de conexão ao servidor
-const PORT = 8081
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Conexão ao servidor feita com sucesso, PORTA: ${PORT}`)
 })
